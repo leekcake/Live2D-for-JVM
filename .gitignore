@@ -17,3 +17,5 @@ out/
 .DS_Store
 
 /captures
+
+/Native/CubismNativeCore
