@@ -1,5 +1,26 @@
 apply plugin: 'kotlin'
 
+//Import: https://github.com/adammurdoch/native-platform/blob/master/build.gradle
+//noinspection GroovyAssignabilityCheck
+task generateJniHeaders() {
+    def classpath = sourceSets.main.output.asPath
+    def outputDir = new File(project.rootDir, "Native/Live2DCubismCoreJNI")
+    outputDir.mkdirs()
+//    def nativeIncludes = "src/native/include"
+    //System.println("javah -d ${outputDir.path} -classpath $classpath moe.leekcake.live2dforjvm.Live2DCubismCoreJNI")
+
+    doLast {
+        exec {
+            executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
+                    args "-d", outputDir.path
+                    args "-classpath", classpath
+                    args "moe.leekcake.live2dforjvm.Live2DCubismCoreJNI"
+        }
+    }
+
+    dependsOn classes
+}
+
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
