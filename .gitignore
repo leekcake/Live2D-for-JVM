@@ -1,0 +1,19 @@
+#IDEA
+*.iml
+/.idea
+
+#Build File
+*.class
+*.dll
+out/
+/build
+!**/src/**/build
+!**/test/**/build
+
+#Gradle
+.gradle
+
+#Mac
+.DS_Store
+
+/captures
