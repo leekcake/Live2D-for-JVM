@@ -1,3 +1,14 @@
+#Cmake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
 #IDEA
 *.iml
 /.idea
@@ -5,6 +16,7 @@
 #Build File
 *.class
 *.dll
+*.so
 out/
 /build
 !**/src/**/build
