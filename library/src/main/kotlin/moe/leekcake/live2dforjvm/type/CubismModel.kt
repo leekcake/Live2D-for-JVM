@@ -6,5 +6,17 @@ package moe.leekcake.live2dforjvm.type
  * Wrapping of csmModel(Core)
  */
 class CubismModel {
+    object AnimationCurveType {
+        val opacityAnimationCurve = 0
+        val eyeBlinkAnimationCurve = 1
+        val lipSyncAnimationCurve = 2
+    }
 
+    class CubismModelHashTable {
+        @JvmField
+        var parameterIdHashes: IntArray? = null
+
+        @JvmField
+        var partIdHashes: IntArray? = null
+    }
 }
