@@ -6,24 +6,38 @@ apply plugin: 'kotlin'
 //noinspection GroovyAssignabilityCheck
 task generateJniHeaders() {
     def classpath = sourceSets.main.output.asPath
-    def outputDir = new File(project.rootDir, "Native/Live2DCubismCoreJNI")
-    outputDir.mkdirs()
+    def coreDir = new File(project.rootDir, "Native/Live2DCubismCoreJNI")
+    coreDir.mkdirs()
+
+    def memoryDir = new File(project.rootDir, "Native/MemoryAccessJNI")
+    memoryDir.mkdirs()
+
+    def frameworkDir = new File(project.rootDir, "Native/Live2DCubismFrameworkJNI")
+    frameworkDir.mkdirs()
+
 //    def nativeIncludes = "src/native/include"
     //System.println("javah -d ${outputDir.path} -classpath $classpath moe.leekcake.live2dforjvm.Live2DCubismCoreJNI")
 
     doLast {
         exec {
             executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
-            args "-d", outputDir.path
+            args "-d", coreDir.path
             args "-classpath", classpath
             args "moe.leekcake.live2dforjvm.Live2DCubismCoreJNI"
         }
 
         exec {
             executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
-            args "-d", new File(project.rootDir, "Native/MemoryAccessJNI")
+            args "-d", memoryDir.path
             args "-classpath", classpath
             args "moe.leekcake.live2dforjvm.MemoryAccessJNI"
+        }
+
+        exec {
+            executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
+            args "-d", frameworkDir.path
+            args "-classpath", classpath
+            args "moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI"
         }
     }
 
