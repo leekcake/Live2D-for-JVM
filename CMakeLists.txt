@@ -27,6 +27,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
 
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
 set(FrameworkJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI)
+set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
 add_library(
 	Live2DCubismJNI
 	SHARED
@@ -34,4 +35,10 @@ add_library(
 	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h
 	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.cpp
 	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.h
+)
+add_library(
+	MemoryAccessJNI
+	SHARED
+	${MemoryAccessJNI}/moe_leekcake_live2dforjvm_MemoryAccessJNI.cpp
+	${MemoryAccessJNI}/moe_leekcake_live2dforjvm_MemoryAccessJNI.h
 )
