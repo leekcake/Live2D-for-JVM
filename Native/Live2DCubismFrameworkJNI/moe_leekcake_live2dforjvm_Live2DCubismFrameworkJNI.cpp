@@ -3,6 +3,46 @@
 
 /*
 * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getHashTableParameterCount
+* Signature: (J)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTableParameterCount
+(JNIEnv * env, jclass obj, jlong table) {
+	return ((csmModelHashTable*)table)->Parameters.Count;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getHashTableParameterHash
+* Signature: (JI)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTableParameterHash
+(JNIEnv * env, jclass obj, jlong table, jint inx) {
+	return ((csmModelHashTable*)table)->Parameters.IdHashes[inx];
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getHashTablePartCount
+* Signature: (J)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTablePartCount
+(JNIEnv * env, jclass obj, jlong table) {
+	return ((csmModelHashTable*)table)->Parts.Count
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getHashTablePartHash
+* Signature: (JI)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTablePartHash
+(JNIEnv * env, jclass obj, jlong table, jint inx) {
+	return ((csmModelHashTable*)table)->Parts.IdHashes[inx];
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
 * Method:    generateHashId
 * Signature: (Ljava/lang/String;)I
 */

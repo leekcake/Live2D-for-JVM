@@ -1,6 +1,38 @@
 package moe.leekcake.live2dforjvm;
 
 public class Live2DCubismFrameworkJNI {
+    //Model Hashtable Read Proxy for Java
+
+    /**
+     * Get Parameter Count from Model Hashtable
+     * @param table Hashtable pointer
+     * @return Parameter Count
+     */
+    public static native int getHashTableParameterCount(long table);
+
+    /**
+     * Get Parameter Hash from Model Hashtable
+     * @param table Hashtable pointer
+     * @param inx Index to access
+     * @return Parameter Hash
+     */
+    public static native int getHashTableParameterHash(long table, int inx);
+
+    /**
+     * Get Part Count from Model Hashtable
+     * @param table Hashtable pointer
+     * @return Part Count
+     */
+    public static native int getHashTablePartCount(long table);
+
+    /**
+     * Get Part Hash from Model Hashtable
+     * @param table Hashtable pointer
+     * @param inx Index to access
+     * @return Part Hash
+     */
+    public static native int getHashTablePartHash(long table, int inx);
+
     // ---------------- //
     // MODEL EXTENSIONS //
     // ---------------- //

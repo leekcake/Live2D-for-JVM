@@ -9,6 +9,38 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getHashTableParameterCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTableParameterCount
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getHashTableParameterHash
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTableParameterHash
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getHashTablePartCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTablePartCount
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getHashTablePartHash
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTablePartHash
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
  * Method:    generateHashId
  * Signature: (Ljava/lang/String;)I
  */
