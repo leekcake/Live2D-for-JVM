@@ -3,11 +3,7 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
 
 class Vector2(val pointer: Long) {
-    companion object {
-        fun allocate(x: Float = 0f, y: Float = 0f): Vector2 {
-            return Vector2(Live2DCubismCoreJNI.allocateVector2(x, y))
-        }
-    }
+    constructor(x: Float = 0f, y: Float = 0f): this(Live2DCubismCoreJNI.allocateVector2(x, y))
 
     var x: Float
         get() = Live2DCubismCoreJNI.getVector2X(pointer)
