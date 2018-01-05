@@ -9,6 +9,30 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    allocatePhysicsOptions
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocatePhysicsOptions
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getGravitiyPhysicsOptions
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getGravitiyPhysicsOptions
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getWindPhysicsOptions
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getWindPhysicsOptions
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
  * Method:    getHashTableParameterCount
  * Signature: (J)I
  */

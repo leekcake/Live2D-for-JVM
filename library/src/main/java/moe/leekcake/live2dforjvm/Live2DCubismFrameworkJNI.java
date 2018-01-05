@@ -1,8 +1,20 @@
 package moe.leekcake.live2dforjvm;
 
 public class Live2DCubismFrameworkJNI {
-    //Model Hashtable Read Proxy for Java
+    //Physics Options Read Proxy for Java
+    public static native long allocatePhysicsOptions();
 
+    /**
+     * @return pointer of Gravity Vector2
+     */
+    public static native long getGravitiyPhysicsOptions(long options);
+
+    /**
+     * @return pointer of Wind Vector2
+     */
+    public static native long getWindPhysicsOptions(long options);
+
+    //Model Hashtable Read Proxy for Java
     /**
      * Get Parameter Count from Model Hashtable
      * @param table Hashtable pointer

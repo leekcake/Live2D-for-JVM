@@ -3,6 +3,36 @@
 
 /*
 * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    allocatePhysicsOptions
+* Signature: ()J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocatePhysicsOptions
+(JNIEnv * env, jclass obj) {
+	return (jlong) new csmPhysicsOptions();
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getGravitiyPhysicsOptions
+* Signature: (J)J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getGravitiyPhysicsOptions
+(JNIEnv * env, jclass obj, jlong options) {
+	return (jlong) &((csmPhysicsOptions*)options)->Gravity;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getWindPhysicsOptions
+* Signature: (J)J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getWindPhysicsOptions
+(JNIEnv *, jclass, jlong options) {
+	return (jlong) &((csmPhysicsOptions*)options)->Wind;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
 * Method:    getHashTableParameterCount
 * Signature: (J)I
 */
