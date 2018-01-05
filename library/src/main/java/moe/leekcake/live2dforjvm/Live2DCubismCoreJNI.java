@@ -6,10 +6,24 @@ import moe.leekcake.live2dforjvm.type.Vector2;
  * JNI Class for Live2DCubismCore
  */
 public class Live2DCubismCoreJNI {
-
     static {
         System.loadLibrary("Live2DCubismCoreJNI");
-    }
+}
+
+    /**
+     * Allocate new Vector2
+     * @param x x value
+     * @param y y value
+     * @return Vector2 pointer
+     */
+    public static native long allocateVector2(float x, float y);
+
+    public static native float getVector2X(long vector);
+    public static native float getVector2Y(long vector);
+
+    public static native void setVector2X(long vector, float x);
+    public static native void setVector2Y(long vector, float y);
+
 
     //Live2DCubismCore.h
 
@@ -93,11 +107,11 @@ public class Live2DCubismCoreJNI {
     /**
      * Get Canvas Info from Model
      * @param model csmModel pointer
-     * @param outSizeInPixels canvas size in pixels
-     * @param outOriginInPixels origin size in pixels
+     * @param outSizeInPixels canvas size in pixels (Vector2)
+     * @param outOriginInPixels origin size in pixels (Vector2)
      * @return outPixelsPerUnit //TODO: Know about 'unit'
      */
-    public static native float readCanvasInfo(long model, Vector2 outSizeInPixels, Vector2 outOriginInPixels);
+    public static native float readCanvasInfo(long model, long outSizeInPixels, long outOriginInPixels);
 
     /* ---------- *
      * PARAMETERS *
@@ -175,10 +189,10 @@ public class Live2DCubismCoreJNI {
     public static native int getDrawableVertexCount(long model, int inx);
 
     //csmApi const csmVector2** csmGetDrawableVertexPositions(const csmModel* model);
-    public static native void getDrawableVertexPosition(long model, int inx, int vertexInx, Vector2 out);
+    public static native long getDrawableVertexPosition(long model, int inx, int vertexInx);
 
     //csmApi const csmVector2** csmGetDrawableVertexUvs(const csmModel* model);
-    public static native void getDrawableVertexUv(long model, int inx, int vertexInx, Vector2 out);
+    public static native long getDrawableVertexUv(long model, int inx, int vertexInx);
 
     //csmApi const int* csmGetDrawableIndexCounts(const csmModel* model);
     public static native int getDrawableIndexCount(long model, int inx);

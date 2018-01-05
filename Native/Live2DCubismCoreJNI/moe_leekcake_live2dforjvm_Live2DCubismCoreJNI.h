@@ -9,6 +9,46 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    allocateVector2
+ * Signature: (FF)J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_allocateVector2
+  (JNIEnv *, jclass, jfloat, jfloat);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    getVector2X
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2X
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    getVector2Y
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2Y
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    setVector2X
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2X
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    setVector2Y
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2Y
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
  * Method:    getVersion
  * Signature: ()J
  */
@@ -50,10 +90,10 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_update
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
  * Method:    readCanvasInfo
- * Signature: (JLmoe/leekcake/live2dforjvm/type/Vector2;Lmoe/leekcake/live2dforjvm/type/Vector2;)F
+ * Signature: (JJJ)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_readCanvasInfo
-  (JNIEnv *, jclass, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jlong, jlong);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
@@ -218,18 +258,18 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
  * Method:    getDrawableVertexPosition
- * Signature: (JIILmoe/leekcake/live2dforjvm/type/Vector2;)V
+ * Signature: (JII)J
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
-  (JNIEnv *, jclass, jlong, jint, jint, jobject);
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
+  (JNIEnv *, jclass, jlong, jint, jint);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
  * Method:    getDrawableVertexUv
- * Signature: (JIILmoe/leekcake/live2dforjvm/type/Vector2;)V
+ * Signature: (JII)J
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
-  (JNIEnv *, jclass, jlong, jint, jint, jobject);
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
+  (JNIEnv *, jclass, jlong, jint, jint);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI

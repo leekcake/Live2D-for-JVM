@@ -5,15 +5,57 @@
 
 using namespace std;
 
-//Utils Function
-void copyVector(JNIEnv * env, csmVector2 src, jobject dest) {
-	jclass jVector2 = env->GetObjectClass(dest);
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Method:    allocateVector2
+* Signature: (FF)J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_allocateVector2
+(JNIEnv * env, jclass obj, jfloat x, jfloat y) {
+	csmVector2* vector = new csmVector2();
+	vector->X = x;
+	vector->Y = y;
+	return (jlong)vector;
+}
 
-	jfieldID xField = env->GetFieldID(jVector2, "x", "F");
-	jfieldID yField = env->GetFieldID(jVector2, "y", "F");
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Method:    getVector2X
+* Signature: (J)F
+*/
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2X
+(JNIEnv * env, jclass obj, jlong vector) {
+	return ((csmVector2*)vector)->X;
+}
 
-	env->SetFloatField(dest, xField, src.X);
-	env->SetFloatField(dest, yField, src.Y);
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Method:    getVector2Y
+* Signature: (J)F
+*/
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2Y
+(JNIEnv * env, jclass obj, jlong vector) {
+	return ((csmVector2*)vector)->Y;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Method:    setVector2X
+* Signature: (JF)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2X
+(JNIEnv * env, jclass obj, jlong vector, jfloat value) {
+	((csmVector2*)vector)->X = value;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Method:    setVector2Y
+* Signature: (JF)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2Y
+(JNIEnv * env, jclass obj, jlong vector, jfloat value) {
+	((csmVector2*)vector)->Y = value;
 }
 
 /*
@@ -72,14 +114,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_update
  * Signature: (JLmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_readCanvasInfo
-(JNIEnv * env, jclass obj, jlong model, jobject objSize, jobject objOrigin) {
-	csmVector2 size, origin;
+(JNIEnv * env, jclass obj, jlong model, jlong size, jlong origin) {
 	float perUnit;
-	csmReadCanvasInfo((csmModel*)model, &size, &origin, &perUnit);
-
-	copyVector(env, size, objSize);
-	copyVector(env, origin, objOrigin);
-
+	csmReadCanvasInfo((csmModel*)model, (csmVector2*)size, (csmVector2*)origin, &perUnit);
 	return perUnit;
 }
 
@@ -288,9 +325,9 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableVertexPosition
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
-(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx, jobject out) {
-	copyVector(env, csmGetDrawableVertexPositions((const csmModel*)model)[inx][vertexInx], out);
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
+(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx, jlong out) {
+	return (jlong)&csmGetDrawableVertexPositions((const csmModel*)model)[inx][vertexInx];
 }
 
 /*
@@ -298,9 +335,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableVertexUv
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
 (JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx, jobject out) {
-	copyVector(env, csmGetDrawableVertexUvs((const csmModel*)model)[inx][vertexInx], out);
+	return (jlong)&csmGetDrawableVertexUvs((const csmModel*)model)[inx][vertexInx];
 }
 
 /*
