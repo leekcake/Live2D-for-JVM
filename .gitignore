@@ -13,6 +13,9 @@ CTestTestfile.cmake
 *.iml
 /.idea
 
+#VS Code
+/.vscode
+
 #Build File
 *.class
 *.dll
