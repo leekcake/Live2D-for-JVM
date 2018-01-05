@@ -153,10 +153,29 @@ public class Live2DCubismFrameworkJNI {
                                                        long handleModelCurve,
                                                        long userData);
 
+    /**
+     * Gets the deserialized size of a serialized physics in bytes.
+     * @param physicsJson Serialized physics to query for.
+     * @return Number of bytes necessary.
+     */
     public static native long getDeserializedSizeofPhysics(String physicsJson);
 
+    /**
+     * Deserializes physics.
+     * @param physicsJson Serialized physics.
+     * @param address Address to place deserialized animation at.
+     * @param size Size of passed memory block (in bytes).
+     * @return Valid pointer on success; '0' otherwise.
+     */
     public static native long deserializePhysicsInPlace(String physicsJson, long address, long size);
 
+    /**
+     * Evaluates physics.
+     * @param model Model to apply result to.
+     * @param physics Physics to evaluate.
+     * @param options Options of evaluation.
+     * @param deltaTime Time passed since last tick?
+     */
     public static native void csmPhysicsEvaluate(long model,
                                                  long physics,
                                                  long options,
