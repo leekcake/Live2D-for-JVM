@@ -19,7 +19,25 @@ set(CMAKE_CXX_COMPILER "gcc")
 include(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/CMakeLists.txt)
 
 set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
-set(CSM_COMPONENTS_BUILD_GL_RENDERER OFF)
+
+set(CSM_COMPONENTS_BUILD_GL_RENDERER ON)
+# Detect desktop.
+if (NOT ANDROID AND NOT IOS AND NOT EMSCRIPTEN AND NOT RPI)
+  set(_DESKTOP ON)
+endif ()
+
+# Set glad flag on desktop.
+if (_DESKTOP)
+  set(_USE_GLAD ON)
+# ... and OpenGL ES 2.0 flag else.
+else ()
+  set(_USE_GLES20 ON)
+endif ()
+
+if (_DESKTOP)
+  set(CSM_COMPONENTS_GL_H ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/include/glad/glad.h CACHE STRING "" FORCE)
+endif ()
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/CMakeLists.txt)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
@@ -28,6 +46,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
 set(FrameworkJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI)
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
+set(GLRenderingJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismGLRenderingJNI)
 add_library(
 	Live2DCubismJNI
 	SHARED
@@ -35,6 +54,8 @@ add_library(
 	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h
 	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.cpp
 	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.h
+	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.cpp
+	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.h
 )
 add_library(
 	MemoryAccessJNI
