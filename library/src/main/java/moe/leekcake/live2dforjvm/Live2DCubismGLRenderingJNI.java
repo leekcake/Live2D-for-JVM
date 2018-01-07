@@ -1,6 +1,10 @@
 package moe.leekcake.live2dforjvm;
 
 public class Live2DCubismGLRenderingJNI {
+    static {
+        System.loadLibrary("Live2DCubismJNI");
+    }
+
     public static native long getSizeofGlRenderer(long model);
 
     public static native long makeGlRendererInPlace(long model, long address, long size);

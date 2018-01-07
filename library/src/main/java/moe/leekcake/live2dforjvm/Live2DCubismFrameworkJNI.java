@@ -1,6 +1,10 @@
 package moe.leekcake.live2dforjvm;
 
 public class Live2DCubismFrameworkJNI {
+    static {
+        System.loadLibrary("Live2DCubismJNI");
+    }
+
     //Physics Options Read Proxy for Java
     public static native long allocatePhysicsOptions();
 
@@ -15,8 +19,10 @@ public class Live2DCubismFrameworkJNI {
     public static native long getWindPhysicsOptions(long options);
 
     //Model Hashtable Read Proxy for Java
+
     /**
      * Get Parameter Count from Model Hashtable
+     *
      * @param table Hashtable pointer
      * @return Parameter Count
      */
@@ -24,14 +30,16 @@ public class Live2DCubismFrameworkJNI {
 
     /**
      * Get Parameter Hash from Model Hashtable
+     *
      * @param table Hashtable pointer
-     * @param inx Index to access
+     * @param inx   Index to access
      * @return Parameter Hash
      */
     public static native int getHashTableParameterHash(long table, int inx);
 
     /**
      * Get Part Count from Model Hashtable
+     *
      * @param table Hashtable pointer
      * @return Part Count
      */
@@ -39,8 +47,9 @@ public class Live2DCubismFrameworkJNI {
 
     /**
      * Get Part Hash from Model Hashtable
+     *
      * @param table Hashtable pointer
-     * @param inx Index to access
+     * @param inx   Index to access
      * @return Part Hash
      */
     public static native int getHashTablePartHash(long table, int inx);
@@ -179,14 +188,15 @@ public class Live2DCubismFrameworkJNI {
 
     /**
      * Evaluates an animation fast by using a hash table for look-ups.
-     * @param animation Animation to evaluate.
-     * @param state Animation state.
-     * @param blend Blend function to use for filling sink.
-     * @param weight Blend weight factor.
-     * @param model Model to apply results to.
-     * @param table Model table to user for look-ups.
+     *
+     * @param animation        Animation to evaluate.
+     * @param state            Animation state.
+     * @param blend            Blend function to use for filling sink.
+     * @param weight           Blend weight factor.
+     * @param model            Model to apply results to.
+     * @param table            Model table to user for look-ups.
      * @param handleModelCurve [Optional] Model curve handler.
-     * @param userData [Optional] Data to pass to model curve handler.
+     * @param userData         [Optional] Data to pass to model curve handler.
      */
     public static native void csmEvaluateAnimationFAST(long animation,
                                                        long state,
@@ -199,6 +209,7 @@ public class Live2DCubismFrameworkJNI {
 
     /**
      * Gets the deserialized size of a serialized physics in bytes.
+     *
      * @param physicsJson Serialized physics to query for.
      * @return Number of bytes necessary.
      */
@@ -206,18 +217,20 @@ public class Live2DCubismFrameworkJNI {
 
     /**
      * Deserializes physics.
+     *
      * @param physicsJson Serialized physics.
-     * @param address Address to place deserialized animation at.
-     * @param size Size of passed memory block (in bytes).
+     * @param address     Address to place deserialized animation at.
+     * @param size        Size of passed memory block (in bytes).
      * @return Valid pointer on success; '0' otherwise.
      */
     public static native long deserializePhysicsInPlace(String physicsJson, long address, long size);
 
     /**
      * Evaluates physics.
-     * @param model Model to apply result to.
-     * @param physics Physics to evaluate.
-     * @param options Options of evaluation.
+     *
+     * @param model     Model to apply result to.
+     * @param physics   Physics to evaluate.
+     * @param options   Options of evaluation.
      * @param deltaTime Time passed since last tick?
      */
     public static native void csmPhysicsEvaluate(long model,

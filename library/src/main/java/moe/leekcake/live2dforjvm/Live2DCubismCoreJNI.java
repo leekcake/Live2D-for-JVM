@@ -7,11 +7,12 @@ import moe.leekcake.live2dforjvm.type.Vector2;
  */
 public class Live2DCubismCoreJNI {
     static {
-        System.loadLibrary("Live2DCubismCoreJNI");
-}
+        System.loadLibrary("Live2DCubismJNI");
+    }
 
     /**
      * Allocate new Vector2
+     *
      * @param x x value
      * @param y y value
      * @return Vector2 pointer
@@ -19,9 +20,11 @@ public class Live2DCubismCoreJNI {
     public static native long allocateVector2(float x, float y);
 
     public static native float getVector2X(long vector);
+
     public static native float getVector2Y(long vector);
 
     public static native void setVector2X(long vector, float x);
+
     public static native void setVector2Y(long vector, float y);
 
 
@@ -52,8 +55,9 @@ public class Live2DCubismCoreJNI {
     /**
      * Revive Moc3 file from memory<br>
      * TODO: Make 'Revive' more understandable
+     *
      * @param address Address of Memory
-     * @param size Size of Memory
+     * @param size    Size of Memory
      * @return csmMoc pointer
      */
     public static native long reviveMocInPlace(long address, long size);
@@ -67,6 +71,7 @@ public class Live2DCubismCoreJNI {
     /**
      * Get Size for Allocate Memory (for Initialize Model)
      * //TODO: Better Comment...
+     *
      * @param moc csmMoc pointer
      * @return Size of Model
      */
@@ -78,9 +83,10 @@ public class Live2DCubismCoreJNI {
 
     /**
      * Initialize model from moc file to memory
-     * @param moc csmMoc pointer
+     *
+     * @param moc     csmMoc pointer
      * @param address Address of Memory
-     * @param size Size of Memory
+     * @param size    Size of Memory
      * @return csmModel pointer
      */
     public static native long initializeModelInPlace(long moc, long address, long size);
@@ -106,8 +112,9 @@ public class Live2DCubismCoreJNI {
 
     /**
      * Get Canvas Info from Model
-     * @param model csmModel pointer
-     * @param outSizeInPixels canvas size in pixels (Vector2)
+     *
+     * @param model             csmModel pointer
+     * @param outSizeInPixels   canvas size in pixels (Vector2)
      * @param outOriginInPixels origin size in pixels (Vector2)
      * @return outPixelsPerUnit //TODO: Know about 'unit'
      */
