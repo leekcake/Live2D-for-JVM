@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_g
 */
 JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getHashTablePartCount
 (JNIEnv * env, jclass obj, jlong table) {
-	return ((csmModelHashTable*)table)->Parts.Count
+	return ((csmModelHashTable*)table)->Parts.Count;
 }
 
 /*
@@ -78,7 +78,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_g
 */
 JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_generateHashId
 (JNIEnv * env, jclass obj, jstring id) {
-	return csmHashId(env->GetStringUTFChars(id, false));
+	return csmHashId(env->GetStringUTFChars(id, (jboolean*) false));
 }
 
 /*
@@ -198,7 +198,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_u
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getDeserializedSizeofAnimation
 (JNIEnv * env, jclass obj, jstring json) {
-	return csmGetDeserializedSizeofAnimation(env->GetStringUTFChars(json, false));
+	return csmGetDeserializedSizeofAnimation(env->GetStringUTFChars(json, (jboolean*) false));
 }
 
 /*
@@ -208,7 +208,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_deserializeAnimationInPlace
 (JNIEnv * env, jclass obj, jstring json, jlong address, jlong size) {
-	return (jlong)csmDeserializeAnimationInPlace(env->GetStringUTFChars(json, false), (void*)address, size);
+	return (jlong)csmDeserializeAnimationInPlace(env->GetStringUTFChars(json, (jboolean*) false), (void*)address, size);
 }
 
 /*
@@ -236,7 +236,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_c
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getDeserializedSizeofPhysics
 (JNIEnv * env, jclass obj, jstring json) {
-	return csmGetDeserializedSizeofPhysics(env->GetStringUTFChars(json, false));
+	return csmGetDeserializedSizeofPhysics(env->GetStringUTFChars(json, (jboolean*) false));
 }
 
 /*
@@ -246,7 +246,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_deserializePhysicsInPlace
 (JNIEnv * env, jclass obj, jstring json, jlong address, jlong size) {
-	return (jlong)csmDeserializePhysicsInPlace(env->GetStringUTFChars(json, false), (void*)address, size);
+	return (jlong)csmDeserializePhysicsInPlace(env->GetStringUTFChars(json, (jboolean*) false), (void*)address, size);
 }
 
 /*

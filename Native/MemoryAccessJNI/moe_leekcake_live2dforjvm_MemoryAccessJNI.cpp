@@ -2,7 +2,10 @@
 #include <jni.h>
 #include <iostream>
 #include <stdio.h>
+#include <cstring>
 /* Header for class moe_leekcake_live2dforjvm_MemoryAccessJNI */
+
+using namespace std;
 
 #ifndef _Included_moe_leekcake_live2dforjvm_MemoryAccessJNI
 #define _Included_moe_leekcake_live2dforjvm_MemoryAccessJNI

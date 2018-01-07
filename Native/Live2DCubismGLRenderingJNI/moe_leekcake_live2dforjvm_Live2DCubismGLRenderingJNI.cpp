@@ -49,5 +49,5 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
 */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_drawGl
 (JNIEnv * env, jclass obj, jlong renderer, jfloat mvp, jlong textures) {
-    csmGlDraw((csmGlRenderer) renderer, mvp, textures);
+    csmGlDraw((csmGlRenderer*) renderer, &mvp, (GLuint*) textures);
 }
