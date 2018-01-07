@@ -20,6 +20,7 @@ CTestTestfile.cmake
 *.class
 *.dll
 *.so
+*.a
 out/
 /build
 !**/src/**/build
