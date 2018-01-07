@@ -1,9 +1,5 @@
 #include "moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h"
 #include <Live2DCubismCore.h>
-#include <stdlib.h>
-#include <iostream>
-
-using namespace std;
 
 /*
 * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
