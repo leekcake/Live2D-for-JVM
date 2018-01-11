@@ -7,11 +7,10 @@ class CubismPhysics(pointer: Long): AutoPointer(pointer) {
     companion object {
         fun generatePhysics(json: String): Long {
             val size = Live2DCubismFrameworkJNI.getDeserializedSizeofPhysics(json)
-            val dataPointer = MemoryAccessJNI.allocate(size.toInt())
+            val pointer = MemoryAccessJNI.allocate(size.toInt())
 
-            val pointer = Live2DCubismFrameworkJNI.deserializePhysicsInPlace(json, dataPointer, size)
+            Live2DCubismFrameworkJNI.deserializePhysicsInPlace(json, pointer, size)
 
-            MemoryAccessJNI.deAllocate(dataPointer)
             return pointer
         }
     }

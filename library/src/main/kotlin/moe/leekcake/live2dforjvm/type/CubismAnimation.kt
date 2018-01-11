@@ -3,20 +3,17 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
 
-class CubismAnimation(pointer: Long) : AutoPointer(pointer) {
+class CubismAnimation(pointer: Long): AutoPointer(pointer) {
     companion object {
         private fun generateAnimation(json: String): Long {
             val size = Live2DCubismFrameworkJNI.getDeserializedSizeofAnimation(json)
-            val dataPointer = MemoryAccessJNI.allocate(size.toInt())
-            val pointer = Live2DCubismFrameworkJNI.deserializeAnimationInPlace(json, dataPointer, size)
-
-            MemoryAccessJNI.deAllocate(dataPointer)
+            val pointer = MemoryAccessJNI.allocate(size.toInt())
+            Live2DCubismFrameworkJNI.deserializeAnimationInPlace(json, pointer, size)
 
             return pointer
         }
     }
-
-    constructor(json: String) : this(generateAnimation(json))
+    constructor(json: String): this( generateAnimation(json) )
 
     fun evaluate(state: CubismAnimationState,
                  blendFunction: Long,
