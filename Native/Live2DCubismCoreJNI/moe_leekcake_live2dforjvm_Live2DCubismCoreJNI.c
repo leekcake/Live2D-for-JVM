@@ -1,4 +1,5 @@
 #include "moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h"
+#include <stdlib.h>
 #include <Live2DCubismCore.h>
 
 /*
@@ -8,7 +9,7 @@
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_allocateVector2
 (JNIEnv * env, jclass obj, jfloat x, jfloat y) {
-	csmVector2* vector = new csmVector2();
+	csmVector2* vector = malloc(sizeof(csmVector2));
 	vector->X = x;
 	vector->Y = y;
 	return (jlong)vector;
@@ -133,7 +134,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPar
 */
 JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
-	return env->NewStringUTF(csmGetParameterIds((const csmModel*)model)[inx]);
+	return (*env)->NewStringUTF(env, csmGetParameterIds((const csmModel*)model)[inx]);
 }
 
 /*
@@ -193,7 +194,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPar
 */
 JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPartId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
-	return env->NewStringUTF(csmGetPartIds((const csmModel*)model)[inx]);
+	return (*env)->NewStringUTF(env, csmGetPartIds((const csmModel*)model)[inx]);
 }
 
 /*
@@ -223,7 +224,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 */
 JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
-	return env->NewStringUTF(csmGetDrawableIds((const csmModel*)model)[inx]);
+	return (*env)->NewStringUTF(env, csmGetDrawableIds((const csmModel*)model)[inx]);
 }
 
 /*

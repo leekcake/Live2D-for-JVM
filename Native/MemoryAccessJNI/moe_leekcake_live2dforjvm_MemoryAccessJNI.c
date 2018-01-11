@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_allocateA
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_writeToMemory
 (JNIEnv * env, jclass obj, jlong memory, jint start, jbyteArray data, jint dataStart, jint dataLength) {
-	jbyte* bufferPtr = env->GetByteArrayElements(data, NULL);
+	jbyte* bufferPtr = (*env)->GetByteArrayElements(env, data, NULL);
 
 	memcpy(((char *)memory) + start, bufferPtr + dataStart, dataLength);
 }
