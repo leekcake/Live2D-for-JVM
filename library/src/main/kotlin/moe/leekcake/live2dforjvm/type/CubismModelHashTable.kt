@@ -16,6 +16,26 @@ class CubismModelHashTable(pointer: Long): AutoPointer(pointer) {
 
     constructor(model: CubismModel): this( generateHashTableFromModel(model) )
 
+    val parameter = Parameter()
+    inner class Parameter {
+        operator fun get(index: Int): Int {
+            return Live2DCubismFrameworkJNI.getHashTableParameterHash(pointer, index)
+        }
+
+        val size: Int
+            get() = Live2DCubismFrameworkJNI.getHashTableParameterCount(pointer)
+    }
+
+    val part = Part()
+    inner class Part {
+        operator fun get(index: Int): Int {
+            return Live2DCubismFrameworkJNI.getHashTablePartHash(pointer, index)
+        }
+
+        val size: Int
+            get() = Live2DCubismFrameworkJNI.getHashTablePartCount(pointer)
+    }
+
     inner class ParameterHashGetter {
         operator fun get(hash: Int): Int {
             return Live2DCubismFrameworkJNI.findParameterIndexByHashFAST(pointer, hash)

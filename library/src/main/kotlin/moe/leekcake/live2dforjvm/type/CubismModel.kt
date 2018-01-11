@@ -151,27 +151,4 @@ class CubismModel(pointer: Long,
         EyeBlinkAnimationCurve(1),
         LipSyncAnimationCurve(2)
     }
-
-    class CubismModelHashTable(val table: Long) {
-        val parameter = Parameter()
-        val part = Part()
-
-        inner class Parameter {
-            operator fun get(index: Int): Int {
-                return Live2DCubismFrameworkJNI.getHashTableParameterHash(table, index)
-            }
-
-            val size: Int
-                get() = Live2DCubismFrameworkJNI.getHashTableParameterCount(table)
-        }
-
-        inner class Part {
-            operator fun get(index: Int): Int {
-                return Live2DCubismFrameworkJNI.getHashTablePartHash(table, index)
-            }
-
-            val size: Int
-                get() = Live2DCubismFrameworkJNI.getHashTablePartCount(table)
-        }
-    }
 }
