@@ -138,7 +138,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_f
 * Method:    csmFindPartIndexByHashFAST
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmFindPartIndexByHashFAST
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_findPartIndexByHashFAST
 (JNIEnv * env, jclass obj, jlong table, jint hash) {
 	return csmFindPartIndexByHashFAST((const csmModelHashTable*)table, hash);
 }
@@ -148,7 +148,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_c
 * Method:    csmFindDrawableIndexByHash
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmFindDrawableIndexByHash
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_findDrawableIndexByHash
 (JNIEnv * env, jclass obj, jlong model, jint hash) {
 	return csmFindDrawableIndexByHash((const csmModel*)model, hash);
 }
@@ -218,7 +218,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 * Method:    csmEvaluateAnimationFAST
 * Signature: (JJJFJJJJ)V
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmEvaluateAnimationFAST
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_evaluateAnimationFAST
 (JNIEnv * env, jclass obj, jlong animation, jlong state, jlong blend,
 	jfloat weight, jlong model, jlong table, jlong handleModelCurve, jlong userData) {
 	csmEvaluateAnimationFAST((const csmAnimation*)animation,
@@ -256,7 +256,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 * Method:    csmPhysicsEvaluate
 * Signature: (JJJF)V
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmPhysicsEvaluate
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_physicsEvaluate
 (JNIEnv * env, jclass obj, jlong model, jlong physics, jlong options, jfloat deltaTime) {
 	csmPhysicsEvaluate((csmModel*)model, (csmPhysicsRig*)physics, (csmPhysicsOptions*)options, deltaTime);
 }

@@ -118,7 +118,7 @@ public class Live2DCubismFrameworkJNI {
      * @param hash  Part ID hash.
      * @return Valid index on success; '-1' otherwise.
      */
-    public static native int csmFindPartIndexByHashFAST(long table, int hash);
+    public static native int findPartIndexByHashFAST(long table, int hash);
 
     /**
      * Finds index of a drawable.
@@ -127,7 +127,7 @@ public class Live2DCubismFrameworkJNI {
      * @param hash  Drawable ID hash.
      * @return Valid index on success; '-1' otherwise.
      */
-    public static native int csmFindDrawableIndexByHash(long model, int hash);
+    public static native int findDrawableIndexByHash(long model, int hash);
 
     /**
      * Queries whether a model uses clipping masks.
@@ -198,7 +198,7 @@ public class Live2DCubismFrameworkJNI {
      * @param handleModelCurve [Optional] Model curve handler.
      * @param userData         [Optional] Data to pass to model curve handler.
      */
-    public static native void csmEvaluateAnimationFAST(long animation,
+    public static native void evaluateAnimationFAST(long animation,
                                                        long state,
                                                        long blend,
                                                        float weight,
@@ -233,7 +233,7 @@ public class Live2DCubismFrameworkJNI {
      * @param options   Options of evaluation.
      * @param deltaTime Time passed since last tick?
      */
-    public static native void csmPhysicsEvaluate(long model,
+    public static native void physicsEvaluate(long model,
                                                  long physics,
                                                  long options,
                                                  float deltaTime);

@@ -113,18 +113,18 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_f
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    csmFindPartIndexByHashFAST
+ * Method:    findPartIndexByHashFAST
  * Signature: (JI)I
  */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmFindPartIndexByHashFAST
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_findPartIndexByHashFAST
   (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    csmFindDrawableIndexByHash
+ * Method:    findDrawableIndexByHash
  * Signature: (JI)I
  */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmFindDrawableIndexByHash
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_findDrawableIndexByHash
   (JNIEnv *, jclass, jlong, jint);
 
 /*
@@ -177,10 +177,10 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    csmEvaluateAnimationFAST
+ * Method:    evaluateAnimationFAST
  * Signature: (JJJFJJJJ)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmEvaluateAnimationFAST
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_evaluateAnimationFAST
   (JNIEnv *, jclass, jlong, jlong, jlong, jfloat, jlong, jlong, jlong, jlong);
 
 /*
@@ -201,10 +201,10 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    csmPhysicsEvaluate
+ * Method:    physicsEvaluate
  * Signature: (JJJF)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_csmPhysicsEvaluate
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_physicsEvaluate
   (JNIEnv *, jclass, jlong, jlong, jlong, jfloat);
 
 #ifdef __cplusplus
