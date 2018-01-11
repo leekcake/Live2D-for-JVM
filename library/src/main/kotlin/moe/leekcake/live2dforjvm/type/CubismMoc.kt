@@ -12,7 +12,7 @@ import java.io.FileInputStream
  *
  * Wrapping of csmMoc(Core)
  */
-class CubismMoc(val pointer: Long) {
+class CubismMoc(pointer: Long): AutoPointer(pointer) {
     companion object {
         private fun generateMocFromStream(stream: InputStream, count: Int): Long {
             val mocDataPointer = MemoryAccessJNI.allocateAligned(count, Alignment.moc)
@@ -44,7 +44,7 @@ class CubismMoc(val pointer: Long) {
     constructor(stream: InputStream, count: Int) : this(generateMocFromStream(stream, count))
     constructor(file: File) : this(generateMocFromStream(FileInputStream(file), file.length().toInt()))
 
-    private fun finalize() {
+    override fun release() {
         MemoryAccessJNI.deAllocateAligned(pointer)
     }
 }

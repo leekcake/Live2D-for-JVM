@@ -3,7 +3,7 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
 
-class CubismModelHashTable(val pointer: Long) {
+class CubismModelHashTable(pointer: Long): AutoPointer(pointer) {
     companion object {
         private fun generateHashTableFromModel(model: CubismModel): Long {
             val size = Live2DCubismFrameworkJNI.getSizeofModelHashTable(model.pointer)

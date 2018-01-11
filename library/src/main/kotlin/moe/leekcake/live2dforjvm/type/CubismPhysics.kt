@@ -3,7 +3,7 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
 
-class CubismPhysics(val pointer: Long) {
+class CubismPhysics(pointer: Long): AutoPointer(pointer) {
     companion object {
         fun generatePhysics(json: String): Long {
             val size = Live2DCubismFrameworkJNI.getDeserializedSizeofPhysics(json)

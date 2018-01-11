@@ -9,16 +9,24 @@ import moe.leekcake.live2dforjvm.MemoryAccessJNI
  *
  * Wrapping of csmModel(Core)
  */
-class CubismModel(moc: CubismMoc) {
-    val pointer: Long
-    private fun finalize() {
-        MemoryAccessJNI.deAllocateAligned(pointer)
-    }
 
-    init {
-        val size = Live2DCubismCoreJNI.getSizeofModel(moc.pointer)
-        pointer = MemoryAccessJNI.allocateAligned(size.toInt(), Alignment.model)
-        Live2DCubismCoreJNI.initializeModelInPlace(moc.pointer, pointer, size)
+class CubismModel(pointer: Long,
+                  //Keeping Reference for Prevent Cubism Moc auto-collected and released by garbage collector (even model need it)
+                  @Suppress("Unused")
+                  val moc: CubismMoc): AutoPointer(pointer) {
+
+    companion object {
+        fun generateModel(moc: CubismMoc): Long {
+            val size = Live2DCubismCoreJNI.getSizeofModel(moc.pointer)
+            val pointer = MemoryAccessJNI.allocateAligned(size.toInt(), Alignment.model)
+            Live2DCubismCoreJNI.initializeModelInPlace(moc.pointer, pointer, size)
+            return pointer
+        }
+    }
+    constructor(moc: CubismMoc): this(generateModel( moc ), moc)
+
+    override fun release() {
+        MemoryAccessJNI.deAllocateAligned(pointer)
     }
 
     val useMask: Boolean
