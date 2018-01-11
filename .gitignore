@@ -9,6 +9,12 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 
+#Windows Build
+*.exp
+*.lib
+*.pdb
+*.ilk
+
 #IDEA
 *.iml
 /.idea
