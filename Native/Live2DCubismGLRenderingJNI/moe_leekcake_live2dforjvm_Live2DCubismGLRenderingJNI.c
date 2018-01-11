@@ -3,6 +3,31 @@
 #include <stdbool.h>
 #include <Live2DCubismGlRendering.h>
 
+#if _USE_GLAD
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
+* Method:    ensureGLAD
+* Signature: ()V
+*/
+#include <glad/glad.h>
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_ensureGLAD
+(JNIEnv * env, jclass obj) {
+	if (!gladLoadGL()) {
+		//TOOD: Error Handle
+	}
+}
+#else
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
+* Method:    ensureGLAD
+* Signature: ()V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_ensureGLAD
+(JNIEnv * env, jclass obj) {
+
+}
+#endif
+
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
  * Method:    getSizeofGlRenderer
@@ -50,5 +75,5 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
 */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_drawGl
 (JNIEnv * env, jclass obj, jlong renderer, jfloatArray mvp, jlong textures) {
-    csmGlDraw((csmGlRenderer*) renderer, (*env)->GetFloatArrayElements(env, mvp, false), (GLuint*) textures);
+    csmGlDraw((csmGlRenderer*) renderer, (*env)->GetFloatArrayElements(env, mvp, false), &textures);
 }

@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
+ * Method:    ensureGLAD
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_ensureGLAD
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
  * Method:    getSizeofGlRenderer
  * Signature: (J)J
  */

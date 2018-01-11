@@ -5,6 +5,11 @@ public class Live2DCubismGLRenderingJNI {
         System.loadLibrary("Live2DCubismJNI");
     }
 
+    /**
+     * Use Framework using GLAD, call gladLoadGL
+     */
+    public static native void ensureGLAD();
+
     public static native long getSizeofGlRenderer(long model);
 
     public static native long makeGlRendererInPlace(long model, long address, long size);
