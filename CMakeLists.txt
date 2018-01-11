@@ -1,47 +1,39 @@
+#Define Project
 CMAKE_MINIMUM_REQUIRED ( VERSION 3.6 )
 PROJECT ("Live2D-for-JVM")
+include(ExternalProject)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native)
-
+#Require JNI
 find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
 
-if(NOT CMAKE_SIZEOF_VOID_P)
-    message("CMAKE_SIZEOF_VOID_P Not defined, set with 64-bit default")
-    set(CMAKE_SIZEOF_VOID_P 8)  # replace 4 with 8 for 64-bit machine
-endif()
-
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "gcc")
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/CMakeLists.txt)
-
+#Define Core
 set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
+#include_directories(${CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY})
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
+
+#Define Components
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/include)
 set(CSM_COMPONENTS_BUILD_GL_RENDERER ON)
-# Detect desktop.
+
 if (NOT ANDROID AND NOT IOS AND NOT EMSCRIPTEN AND NOT RPI)
   set(_DESKTOP ON)
 endif ()
-
 # Set glad flag on desktop.
 if (_DESKTOP)
   set(_USE_GLAD ON)
+  set(CSM_COMPONENTS_GL_H "${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/include/glad/glad.h" CACHE STRING "" FORCE)
 # ... and OpenGL ES 2.0 flag else.
 else ()
   set(_USE_GLES20 ON)
 endif ()
 
-if (_DESKTOP)
-  set(CSM_COMPONENTS_GL_H ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/include/glad/glad.h CACHE STRING "" FORCE)
-endif ()
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/CMakeLists.txt)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
-						${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/include)
+include_directories(  ${CSM_CORE_INCLUDE_DIR}
+  ${CSM_COMPONENTS_INCLUDE_DIR}
+  )
 
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
 set(FrameworkJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI)
@@ -56,7 +48,25 @@ add_library(
 	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.h
 	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.cpp
 	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.h
+	${_CSM_COMPONENTS_SRC_FILES}
 )
+
+target_link_libraries(Live2DCubismJNI 
+${CSM_CORE_LIBS}
+${CSM_COMPONENTS_LIBS}
+)
+
+if (_USE_GLAD)
+  set(_DEFINITIONS -D_USE_GLAD)
+else (_USE_GLES20)
+  set(_DEFINITIONS -D_USE_GLES20)
+endif ()
+target_compile_definitions(Live2DCubismJNI PRIVATE ${_DEFINITIONS})
+
+if (CSM_CORE_DEPS)
+  add_dependencies(Live2DCubismJNI ${CSM_CORE_DEPS})
+endif ()
+
 add_library(
 	MemoryAccessJNI
 	SHARED
