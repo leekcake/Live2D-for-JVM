@@ -25,7 +25,7 @@ class CubismGLRenderer(pointer: Long): AutoPointer(pointer) {
         Live2DCubismGLRenderingJNI.updateGlRenderer(pointer)
     }
 
-    fun draw(mvp: Float, texture: Long) {
+    fun draw(mvp: FloatArray, texture: Long) {
         Live2DCubismGLRenderingJNI.drawGl(pointer, mvp, texture)
     }
 }

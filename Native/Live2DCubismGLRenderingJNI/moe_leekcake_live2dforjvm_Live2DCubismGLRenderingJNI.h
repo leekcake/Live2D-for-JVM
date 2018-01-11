@@ -42,10 +42,10 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI
  * Method:    drawGl
- * Signature: (JFJ)V
+ * Signature: (J[FJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI_drawGl
-  (JNIEnv *, jclass, jlong, jfloat, jlong);
+  (JNIEnv *, jclass, jlong, jfloatArray, jlong);
 
 #ifdef __cplusplus
 }

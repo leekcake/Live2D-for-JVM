@@ -13,5 +13,5 @@ public class Live2DCubismGLRenderingJNI {
 
     public static native void updateGlRenderer(long renderer);
 
-    public static native void drawGl(long renderer, float mvp, long textures);
+    public static native void drawGl(long renderer, float[] mvp, long textures);
 }
