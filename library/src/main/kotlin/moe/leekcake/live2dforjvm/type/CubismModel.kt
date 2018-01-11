@@ -21,6 +21,9 @@ class CubismModel(moc: CubismMoc) {
         Live2DCubismCoreJNI.initializeModelInPlace(moc.pointer, pointer, size)
     }
 
+    val useMask: Boolean
+        get() = Live2DCubismFrameworkJNI.doesModelUseMasks(pointer) != 0
+
     fun update() = Live2DCubismCoreJNI.updateModel(pointer)
 
     data class CanvasInfo(val sizeInPixels: Vector2, val originInPixels: Vector2, val pixelsPerUnit: Float)
@@ -43,12 +46,21 @@ class CubismModel(moc: CubismMoc) {
         val value: Float
             get() = Live2DCubismCoreJNI.getParameterValue(pointer, index)
     }
+
+
     inner class ParameterProvider {
         operator fun get(index: Int) = Parameter(index)
 
         val size: Int = Live2DCubismCoreJNI.getParameterCount(pointer)
     }
     val parameters = ParameterProvider()
+    inner class ParameterGetter {
+        operator fun get(hash: Int): Int {
+            return Live2DCubismFrameworkJNI.findParameterIndexByHash(pointer, hash)
+        }
+    }
+    val parameterMap = ParameterGetter()
+
 
     inner class Part(val index: Int) {
         val id: String = Live2DCubismCoreJNI.getParameterId(pointer, index)
@@ -61,6 +73,12 @@ class CubismModel(moc: CubismMoc) {
         val size: Int = Live2DCubismCoreJNI.getPartCount(pointer)
     }
     val parts = PartProvider()
+    inner class PartGetter {
+        operator fun get(hash: Int): Int {
+            return Live2DCubismFrameworkJNI.findPartIndexByHash(pointer, hash)
+        }
+    }
+    val partMap = PartGetter()
 
     inner class Drawable(val index: Int) {
         val id: String = Live2DCubismCoreJNI.getDrawableId(pointer, index)
@@ -110,15 +128,20 @@ class CubismModel(moc: CubismMoc) {
         val size: Int = Live2DCubismCoreJNI.getDrawableCount(pointer)
     }
     val drawables = DrawableProvider()
+    inner class DrawableGetter {
+        operator fun get(hash: Int): Drawable {
+            return Drawable( Live2DCubismFrameworkJNI.findDrawableIndexByHash(pointer, hash) )
+        }
+    }
 
     fun resetDrawableDynamicFlags() {
         Live2DCubismCoreJNI.resetDrawableDynamicFlags(pointer)
     }
 
-    object AnimationCurveType {
-        val opacityAnimationCurve = 0
-        val eyeBlinkAnimationCurve = 1
-        val lipSyncAnimationCurve = 2
+    enum class AnimationCurveType(val value: Long) {
+        OpacityAnimationCurve(0),
+        EyeBlinkAnimationCurve(1),
+        LipSyncAnimationCurve(2)
     }
 
     class CubismModelHashTable(val table: Long) {

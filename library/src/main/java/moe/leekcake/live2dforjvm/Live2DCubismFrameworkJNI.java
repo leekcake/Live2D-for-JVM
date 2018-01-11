@@ -5,8 +5,16 @@ public class Live2DCubismFrameworkJNI {
         System.loadLibrary("Live2DCubismJNI");
     }
 
+    //Blend Function Read Proxy for Java
+    public static native long getOverrideFloatBlendFunction();
+    public static native long getAdditiveFloatBlendFunction();
+
     //Physics Options Read Proxy for Java
     public static native long allocatePhysicsOptions();
+
+    //Animation State Read Proxy for Java
+    public static native long allocateAnimationState();
+    public static native float getAnimationStateTime(long state);
 
     /**
      * @return pointer of Gravity Vector2

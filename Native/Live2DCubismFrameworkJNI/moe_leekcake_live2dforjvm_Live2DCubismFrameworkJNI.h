@@ -9,11 +9,43 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getOverrideFloatBlendFunction
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getOverrideFloatBlendFunction
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAdditiveFloatBlendFunction
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAdditiveFloatBlendFunction
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
  * Method:    allocatePhysicsOptions
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocatePhysicsOptions
   (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    allocateAnimationState
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocateAnimationState
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAnimationStateTime
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationStateTime
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
