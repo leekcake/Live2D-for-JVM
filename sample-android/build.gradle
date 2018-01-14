@@ -4,6 +4,12 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 25
     buildToolsVersion "27.0.1"
+    
+    sourceSets {
+        main {
+            assets.srcDirs = ['../sample-hiyori']
+        }
+    }
 
     defaultConfig {
         applicationId "moe.leekcake.hellocubism"

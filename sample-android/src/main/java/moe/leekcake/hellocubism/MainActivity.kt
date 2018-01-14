@@ -84,11 +84,13 @@ class MainActivity : Activity() {
 
     private inner class Renderer : GLSurfaceView.Renderer {
         override fun onDrawFrame(p0: GL10?) {
+            /*
             GLES20.glEnable(GLES20.GL_BLEND)
             GLES20.glDisable(GLES20.GL_DEPTH_TEST)
             GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1f); // Black Background
             GLES20.glClearDepthf(1.0f); // Depth Buffer Setup
             GLES20.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA)
+            */
 
             val delta = (System.currentTimeMillis() - lastTime).toFloat() / 1000f
             lastTime = System.currentTimeMillis();
@@ -115,14 +117,14 @@ class MainActivity : Activity() {
 
             Live2DCubismGLRenderingJNI.ensureGLAD()
 
-            val stream = applicationContext.assets.open("Koharu.moc3")
+            val stream = applicationContext.assets.open("hiyori.moc3")
             moc = CubismMoc(stream, stream.available())
             stream.close()
 
             model = CubismModel(moc)
             table = CubismModelHashTable(model)
 
-            val jsonStream = application.assets.open("Koharu.motion3.json")
+            val jsonStream = application.assets.open("hiyori_m01.motion3.json")
             val motionJson = String(jsonStream.readBytes(jsonStream.available()))
             jsonStream.close()
 
@@ -131,11 +133,11 @@ class MainActivity : Activity() {
 
             renderer = CubismGLRenderer(model)
 
-            val textureStream = application.assets.open("Koharu.png")
+            val textureStream = application.assets.open("hiyori_texture.png")
             texture = Utils.loadTexture(textureStream)
             textureStream.close()
 
-            vp = generateViewProjection(2f)
+            vp = generateViewProjection(0.8f)
             GLES20.glViewport(0, 0, width.toInt(), height.toInt())
             lastTime = System.currentTimeMillis()
         }

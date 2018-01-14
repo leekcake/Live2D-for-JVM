@@ -17,7 +17,9 @@ object Utils {
     fun loadTexture(stream: InputStream): Int {
         val textureId = IntArray(1)
         val bitmap: Bitmap
-        bitmap = BitmapFactory.decodeStream(stream)
+        val option = BitmapFactory.Options()
+        option.inScaled = false
+        bitmap = BitmapFactory.decodeStream(stream, null, option)
 
         val byteBuffer = ByteBuffer.allocateDirect(bitmap.width * bitmap.height * 4)
         byteBuffer.order(ByteOrder.BIG_ENDIAN)

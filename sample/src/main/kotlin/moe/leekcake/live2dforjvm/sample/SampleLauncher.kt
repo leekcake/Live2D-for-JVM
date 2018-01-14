@@ -35,19 +35,19 @@ class Sample {
     //For better view, LWJGL Flow is not important for sample
     private fun initCubism() {
         //Load Cubism Example Model
-        val sampleFolder = File("./CubismNativeComponents/sample/assets/Koharu")
+        val sampleFolder = File("../sample-hiyori")
 
-        moc = CubismMoc(File(sampleFolder, "Koharu.moc3"))
+        moc = CubismMoc(File(sampleFolder, "hiyori.moc3"))
         model = CubismModel(moc)
         table = CubismModelHashTable(model)
-        val motionJson = File(sampleFolder, "Koharu.motion3.json").readText()
+        val motionJson = File(sampleFolder, "hiyori_m01.motion3.json").readText()
         animation = CubismAnimation(motionJson)
         animationState = CubismAnimationState()
 
         Live2DCubismGLRenderingJNI.ensureGLAD()
         renderer = CubismGLRenderer(model)
-        texture = Texture.loadTexture(File(sampleFolder, "Koharu.png").path)
-        vp = generateViewProjection(2f)
+        texture = Texture.loadTexture(File(sampleFolder, "hiyori_texture.png").path)
+        vp = generateViewProjection(0.8f)
 
         lastTime = System.currentTimeMillis()
     }
