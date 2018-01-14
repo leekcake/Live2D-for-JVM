@@ -1,12 +1,24 @@
 package moe.leekcake.live2dforjvm;
 
+import kotlin.Suppress;
+
 /**
  * JNI Class for Live2DCubismCore
  */
 public class Live2DCubismCoreJNI {
     static {
         System.loadLibrary("Live2DCubismJNI");
+        registerCallback();
     }
+
+    public static void logCallback(String message) {
+        System.out.println(message);
+    }
+
+    /**
+     * Bind csmLog to logCallback
+     */
+    public static native void registerCallback();
 
     /**
      * Allocate new Vector2

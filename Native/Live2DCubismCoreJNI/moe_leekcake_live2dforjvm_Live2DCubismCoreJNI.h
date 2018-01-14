@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+ * Method:    registerCallback
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_registerCallback
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
  * Method:    allocateVector2
  * Signature: (FF)J
  */

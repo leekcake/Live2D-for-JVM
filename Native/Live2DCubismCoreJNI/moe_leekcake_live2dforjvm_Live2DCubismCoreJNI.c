@@ -2,6 +2,25 @@
 #include <stdlib.h>
 #include <Live2DCubismCore.h>
 
+static JavaVM* vm;
+
+void callback(const char* message) {
+	JNIEnv *env;
+	jint rs = (*vm)->AttachCurrentThread(vm, &env, NULL);
+
+	jclass callbackClass = (*env)->FindClass(env, "moe/leekcake/live2dforjvm/Live2DCubismCoreJNI");
+	jmethodID callbackMethodId = (*env)->GetStaticMethodID(env, callbackClass, "logCallback", "(Ljava/lang/String;)V");
+
+	(*env)->CallStaticVoidMethod(env, callbackClass, callbackMethodId, (*env)->NewStringUTF(env, message));
+}
+
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_registerCallback
+(JNIEnv * env, jclass obj) {
+	(*env)->GetJavaVM(env, &vm);
+	csmSetLogFunction(callback);
+	csmGetLogFunction()("Test!");
+}
+
 /*
 * Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
 * Method:    allocateVector2
