@@ -4,6 +4,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.opengl.GLES20
 import android.util.Log
+import ar.com.hjg.pngj.ImageLineHelper
+import ar.com.hjg.pngj.ImageLineInt
+import ar.com.hjg.pngj.PngReader
 import java.io.InputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -16,44 +19,30 @@ object Utils {
     //Tweaked
     fun loadTexture(stream: InputStream): Int {
         val textureId = IntArray(1)
-        val bitmap: Bitmap
-        val option = BitmapFactory.Options()
-        option.inScaled = false
-        bitmap = BitmapFactory.decodeStream(stream, null, option)
+        val reader = PngReader(stream)
 
-        val byteBuffer = ByteBuffer.allocateDirect(bitmap.width * bitmap.height * 4)
+        val width = reader.imgInfo.cols
+        val height = reader.imgInfo.rows
+
+        val byteBuffer = ByteBuffer.allocateDirect(width * height * 4)
         byteBuffer.order(ByteOrder.BIG_ENDIAN)
         val ib = byteBuffer.asIntBuffer()
 
-        val pixels = IntArray(bitmap.width * bitmap.height)
-        bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-        /*
-        for (i in pixels.indices) {
-            ib.put(pixels[i] shl 8 or pixels[i].ushr(24))
-        }
-        */
-        //Flip Y for OpenGL using
-        val forHeight = bitmap.height - 1
-        for (y in 0 until bitmap.height) {
-            for (x in 0 until bitmap.width) {
-                val value = pixels[x + (y * bitmap.width)]
-                try {
-                    ib.put(x + ((forHeight - y) * bitmap.height), value.shl(8) or value.ushr(24))
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Log.e("xy", "$x . $y")
-                    throw e
-                }
+        var offset = 0
+        for(y in 0 until reader.imgInfo.rows) {
+            val row = reader.readRow() as ImageLineInt
+            val line = row.scanline
+            for(x in 0 until reader.imgInfo.cols) {
+                offset = x * row.imgInfo.channels
+                ib.put(x + ((height - y - 1) * width), line[offset].shl(24) or line[offset + 1].shl(16) or line[offset + 2].shl(8) or line[offset + 3])
             }
         }
-
-        bitmap.recycle()
 
         byteBuffer.position(0)
         GLES20.glGenTextures(1, textureId, 0)
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId[0])
 
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap.width, bitmap.height, 0,
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0,
                 GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, byteBuffer)
 
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)

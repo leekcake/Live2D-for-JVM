@@ -2,6 +2,8 @@ package moe.leekcake.hellocubism
 
 import android.app.Activity
 import android.opengl.GLES20
+import android.opengl.GLES20.GL_COLOR_BUFFER_BIT
+import android.opengl.GLES20.glClear
 import android.opengl.GLSurfaceView
 import android.os.Bundle
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
@@ -60,6 +62,7 @@ class MainActivity : Activity() {
 
     private inner class Renderer : GLSurfaceView.Renderer {
         override fun onDrawFrame(p0: GL10?) {
+            glClear(GL_COLOR_BUFFER_BIT)
             app.tick()
         }
 

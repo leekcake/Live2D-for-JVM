@@ -48,6 +48,7 @@ android {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile group: 'ar.com.hjg', name: 'pngj', version: '2.1.0'
     compile project(':sample')
 }
 repositories {
