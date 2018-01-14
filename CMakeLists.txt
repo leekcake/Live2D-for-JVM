@@ -52,6 +52,10 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
 #Define Components
 option(CSM_COMPONENTS_BUILD_GL_RENDERER "Enables OpenGL reference renderer." ON)
 
+if (_DESKTOP)
+  set(CSM_COMPONENTS_GL_H "${CMAKE_CURRENT_LIST_DIR}/Native/CubismNativeComponents/sample/vender/glad/include/glad/glad.h" CACHE STRING "")
+endif ()
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents)
 
 include_directories(  ${CSM_CORE_INCLUDE_DIR}

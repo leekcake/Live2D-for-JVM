@@ -268,7 +268,8 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_e
 		(csmModel*)model,
 		(const csmModelHashTable*)table,
 		(csmModelAnimationCurveHandler*)handleModelCurve,
-		(void*)userData);
+		(void*)userData,
+		NULL);
 }
 
 /*
