@@ -15,7 +15,7 @@ abstract class AutoPointer(val pointer: Long) {
     }
 
     open fun release() {
-        if(released) return
+        if (released) return
         MemoryAccessJNI.deAllocate(pointer)
         released = true
     }

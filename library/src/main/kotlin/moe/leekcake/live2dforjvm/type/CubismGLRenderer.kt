@@ -3,7 +3,7 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
 
-class CubismGLRenderer(pointer: Long): AutoPointer(pointer) {
+class CubismGLRenderer(pointer: Long) : AutoPointer(pointer) {
     companion object {
         fun generateGLRenderer(model: CubismModel): Long {
             val size = Live2DCubismGLRenderingJNI.getSizeofGlRenderer(model.pointer)
@@ -14,7 +14,7 @@ class CubismGLRenderer(pointer: Long): AutoPointer(pointer) {
         }
     }
 
-    constructor(model: CubismModel): this( generateGLRenderer(model) )
+    constructor(model: CubismModel) : this(generateGLRenderer(model))
 
     override fun release() {
         Live2DCubismGLRenderingJNI.releaseGlRenderer(pointer)

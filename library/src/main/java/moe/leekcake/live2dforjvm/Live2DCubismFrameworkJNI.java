@@ -7,6 +7,7 @@ public class Live2DCubismFrameworkJNI {
 
     //Blend Function Read Proxy for Java
     public static native long getOverrideFloatBlendFunction();
+
     public static native long getAdditiveFloatBlendFunction();
 
     //Physics Options Read Proxy for Java
@@ -14,6 +15,7 @@ public class Live2DCubismFrameworkJNI {
 
     //Animation State Read Proxy for Java
     public static native long allocateAnimationState();
+
     public static native float getAnimationStateTime(long state);
 
     /**
@@ -207,13 +209,13 @@ public class Live2DCubismFrameworkJNI {
      * @param userData         [Optional] Data to pass to model curve handler.
      */
     public static native void evaluateAnimationFAST(long animation,
-                                                       long state,
-                                                       long blend,
-                                                       float weight,
-                                                       long model,
-                                                       long table,
-                                                       long handleModelCurve,
-                                                       long userData);
+                                                    long state,
+                                                    long blend,
+                                                    float weight,
+                                                    long model,
+                                                    long table,
+                                                    long handleModelCurve,
+                                                    long userData);
 
     /**
      * Gets the deserialized size of a serialized physics in bytes.
@@ -242,7 +244,7 @@ public class Live2DCubismFrameworkJNI {
      * @param deltaTime Time passed since last tick?
      */
     public static native void physicsEvaluate(long model,
-                                                 long physics,
-                                                 long options,
-                                                 float deltaTime);
+                                              long physics,
+                                              long options,
+                                              float deltaTime);
 }

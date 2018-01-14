@@ -11,9 +11,9 @@ import moe.leekcake.live2dforjvm.MemoryAccessJNI
  */
 
 class CubismModel(pointer: Long,
-                  //Keeping Reference for Prevent Cubism Moc auto-collected and released by garbage collector (even model need it)
+        //Keeping Reference for Prevent Cubism Moc auto-collected and released by garbage collector (even model need it)
                   @Suppress("Unused")
-                  val moc: CubismMoc): AutoPointer(pointer) {
+                  val moc: CubismMoc) : AutoPointer(pointer) {
 
     companion object {
         fun generateModel(moc: CubismMoc): Long {
@@ -23,7 +23,8 @@ class CubismModel(pointer: Long,
             return pointer
         }
     }
-    constructor(moc: CubismMoc): this(generateModel( moc ), moc)
+
+    constructor(moc: CubismMoc) : this(generateModel(moc), moc)
 
     override fun release() {
         MemoryAccessJNI.deAllocateAligned(pointer)
@@ -35,6 +36,7 @@ class CubismModel(pointer: Long,
     fun update() = Live2DCubismCoreJNI.updateModel(pointer)
 
     data class CanvasInfo(val sizeInPixels: Vector2, val originInPixels: Vector2, val pixelsPerUnit: Float)
+
     fun readCanvasInfo(): CanvasInfo {
         val sizeInPixels = Vector2()
         val originInPixels = Vector2()
@@ -61,12 +63,15 @@ class CubismModel(pointer: Long,
 
         val size: Int = Live2DCubismCoreJNI.getParameterCount(pointer)
     }
+
     val parameters = ParameterProvider()
+
     inner class ParameterGetter {
         operator fun get(hash: Int): Int {
             return Live2DCubismFrameworkJNI.findParameterIndexByHash(pointer, hash)
         }
     }
+
     val parameterMap = ParameterGetter()
 
 
@@ -75,17 +80,21 @@ class CubismModel(pointer: Long,
         val opacity: Float
             get() = Live2DCubismCoreJNI.getPartOpacity(pointer, index)
     }
+
     inner class PartProvider {
         operator fun get(index: Int) = Part(index)
 
         val size: Int = Live2DCubismCoreJNI.getPartCount(pointer)
     }
+
     val parts = PartProvider()
+
     inner class PartGetter {
         operator fun get(hash: Int): Int {
             return Live2DCubismFrameworkJNI.findPartIndexByHash(pointer, hash)
         }
     }
+
     val partMap = PartGetter()
 
     inner class Drawable(val index: Int) {
@@ -108,11 +117,12 @@ class CubismModel(pointer: Long,
 
             val size: Int = Live2DCubismCoreJNI.getDrawableMaskCount(pointer, index)
         }
+
         val masks = MaskProvider()
 
         inner class Vertex(val index: Int) {
-            val position = Vector2( Live2DCubismCoreJNI.getDrawableVertexPosition(pointer, this@Drawable.index, index) )
-            val uv = Vector2( Live2DCubismCoreJNI.getDrawableVertexUv(pointer, this@Drawable.index, index) )
+            val position = Vector2(Live2DCubismCoreJNI.getDrawableVertexPosition(pointer, this@Drawable.index, index))
+            val uv = Vector2(Live2DCubismCoreJNI.getDrawableVertexUv(pointer, this@Drawable.index, index))
         }
 
         inner class VertexProvider {
@@ -120,6 +130,7 @@ class CubismModel(pointer: Long,
 
             val size: Int = Live2DCubismCoreJNI.getDrawableVertexCount(pointer, index)
         }
+
         val vertices = VertexProvider()
 
         inner class IndexProvider {
@@ -127,6 +138,7 @@ class CubismModel(pointer: Long,
 
             val size: Int = Live2DCubismCoreJNI.getDrawableIndexCount(pointer, this@Drawable.index)
         }
+
         val indices = IndexProvider()
     }
 
@@ -135,10 +147,12 @@ class CubismModel(pointer: Long,
 
         val size: Int = Live2DCubismCoreJNI.getDrawableCount(pointer)
     }
+
     val drawables = DrawableProvider()
+
     inner class DrawableGetter {
         operator fun get(hash: Int): Drawable {
-            return Drawable( Live2DCubismFrameworkJNI.findDrawableIndexByHash(pointer, hash) )
+            return Drawable(Live2DCubismFrameworkJNI.findDrawableIndexByHash(pointer, hash))
         }
     }
 

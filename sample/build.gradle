@@ -16,7 +16,7 @@ dependencies {
 //Auto-generated from https://www.lwjgl.org/customize
 import org.gradle.internal.os.OperatingSystem
 
-switch ( OperatingSystem.current() ) {
+switch (OperatingSystem.current()) {
     case OperatingSystem.WINDOWS:
         project.ext.lwjglNatives = "natives-windows"
         break

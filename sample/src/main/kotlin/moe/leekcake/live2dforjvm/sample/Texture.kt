@@ -23,13 +23,11 @@
  */
 package moe.leekcake.live2dforjvm.sample
 
-import java.nio.ByteBuffer
-import java.nio.IntBuffer
-import org.lwjgl.system.MemoryStack
-
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER
 import org.lwjgl.stb.STBImage.*
+import org.lwjgl.system.MemoryStack
+import java.nio.ByteBuffer
 
 /**
  * This class represents a texture.

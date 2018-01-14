@@ -1,7 +1,5 @@
 package moe.leekcake.live2dforjvm;
 
-import moe.leekcake.live2dforjvm.type.Vector2;
-
 /**
  * JNI Class for Live2DCubismCore
  */

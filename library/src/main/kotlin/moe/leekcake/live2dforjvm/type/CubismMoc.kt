@@ -2,9 +2,9 @@ package moe.leekcake.live2dforjvm.type
 
 import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
-import java.io.InputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.InputStream
 
 
 /**
@@ -12,7 +12,7 @@ import java.io.FileInputStream
  *
  * Wrapping of csmMoc(Core)
  */
-class CubismMoc(pointer: Long): AutoPointer(pointer) {
+class CubismMoc(pointer: Long) : AutoPointer(pointer) {
     companion object {
         private fun generateMocFromStream(stream: InputStream, count: Int): Long {
             val mocDataPointer = MemoryAccessJNI.allocateAligned(count, Alignment.moc)

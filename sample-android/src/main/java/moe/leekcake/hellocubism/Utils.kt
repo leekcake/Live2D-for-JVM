@@ -1,23 +1,12 @@
 package moe.leekcake.hellocubism
 
-import android.content.Context
-import android.opengl.GLUtils
-import android.graphics.BitmapFactory
 import android.graphics.Bitmap
-import android.graphics.Matrix
+import android.graphics.BitmapFactory
 import android.opengl.GLES20
-import android.opengl.GLES30
-import android.opengl.GLES32
+import android.util.Log
 import java.io.InputStream
-import javax.microedition.khronos.opengles.GL
-import java.nio.ByteOrder.BIG_ENDIAN
-import android.R.attr.order
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import android.R.attr.bitmap
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.util.Log
 
 
 object Utils {
@@ -43,9 +32,9 @@ object Utils {
         */
         //Flip Y for OpenGL using
         val forHeight = bitmap.height - 1
-        for(y in 0 until bitmap.height) {
-            for(x in 0 until bitmap.width) {
-                val value = pixels[ x + (y * bitmap.width) ]
+        for (y in 0 until bitmap.height) {
+            for (x in 0 until bitmap.width) {
+                val value = pixels[x + (y * bitmap.width)]
                 try {
                     ib.put(x + ((forHeight - y) * bitmap.height), value.shl(8) or value.ushr(24))
                 } catch (e: Exception) {

@@ -2,19 +2,16 @@ package moe.leekcake.hellocubism
 
 import android.app.Activity
 import android.opengl.GLES20
-import android.opengl.GLES20.GL_COLOR_BUFFER_BIT
-import android.opengl.GLES20.GL_DEPTH_BUFFER_BIT
-import android.os.Bundle
 import android.opengl.GLSurfaceView
+import android.os.Bundle
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
 import moe.leekcake.live2dforjvm.type.*
-import java.io.File
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 
-class MainActivity: Activity() {
+class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         glView = GLSurfaceView(this)
@@ -85,7 +82,7 @@ class MainActivity: Activity() {
     private var width = 720f
     private var height = 1280f
 
-    private inner class Renderer: GLSurfaceView.Renderer {
+    private inner class Renderer : GLSurfaceView.Renderer {
         override fun onDrawFrame(p0: GL10?) {
             GLES20.glEnable(GLES20.GL_BLEND)
             GLES20.glDisable(GLES20.GL_DEPTH_TEST)
@@ -126,16 +123,16 @@ class MainActivity: Activity() {
             table = CubismModelHashTable(model)
 
             val jsonStream = application.assets.open("Koharu.motion3.json")
-            val motionJson = String( jsonStream.readBytes(jsonStream.available()) )
+            val motionJson = String(jsonStream.readBytes(jsonStream.available()))
             jsonStream.close()
 
-            animation = CubismAnimation( motionJson )
+            animation = CubismAnimation(motionJson)
             animationState = CubismAnimationState()
 
             renderer = CubismGLRenderer(model)
 
             val textureStream = application.assets.open("Koharu.png")
-            texture = Utils.loadTexture( textureStream )
+            texture = Utils.loadTexture(textureStream)
             textureStream.close()
 
             vp = generateViewProjection(2f)

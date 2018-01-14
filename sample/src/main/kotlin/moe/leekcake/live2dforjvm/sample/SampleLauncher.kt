@@ -4,19 +4,14 @@ import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
 import moe.leekcake.live2dforjvm.type.*
-import org.lwjgl.*
-import org.lwjgl.glfw.*
-import org.lwjgl.opengl.*
-import org.lwjgl.system.*
-
-import java.nio.*
-
-import org.lwjgl.glfw.Callbacks.*
+import org.lwjgl.Version
+import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
+import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
-import org.lwjgl.stb.STBImage
-import org.lwjgl.system.MemoryStack.*
-import org.lwjgl.system.MemoryUtil.*
+import org.lwjgl.system.MemoryStack.stackPush
+import org.lwjgl.system.MemoryUtil.NULL
 import java.io.File
 
 //Quick copy start from https://www.lwjgl.org/guide
@@ -46,12 +41,12 @@ class Sample {
         model = CubismModel(moc)
         table = CubismModelHashTable(model)
         val motionJson = File(sampleFolder, "Koharu.motion3.json").readText()
-        animation = CubismAnimation( motionJson )
+        animation = CubismAnimation(motionJson)
         animationState = CubismAnimationState()
 
         Live2DCubismGLRenderingJNI.ensureGLAD()
         renderer = CubismGLRenderer(model)
-        texture = Texture.loadTexture( File(sampleFolder, "Koharu.png").path )
+        texture = Texture.loadTexture(File(sampleFolder, "Koharu.png").path)
         vp = generateViewProjection(2f)
 
         lastTime = System.currentTimeMillis()
@@ -192,7 +187,7 @@ class Sample {
         // bindings available for use.
         GL.createCapabilities()
 
-        System.out.println( "OpenGL version " + glGetString(GL_VERSION) )
+        System.out.println("OpenGL version " + glGetString(GL_VERSION))
 
         // Make the window visible
         glfwShowWindow(window)

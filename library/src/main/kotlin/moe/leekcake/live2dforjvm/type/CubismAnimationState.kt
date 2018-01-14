@@ -2,7 +2,7 @@ package moe.leekcake.live2dforjvm.type
 
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 
-class CubismAnimationState(pointer: Long = Live2DCubismFrameworkJNI.allocateAnimationState()): AutoPointer(pointer) {
+class CubismAnimationState(pointer: Long = Live2DCubismFrameworkJNI.allocateAnimationState()) : AutoPointer(pointer) {
     init {
         Live2DCubismFrameworkJNI.initializeAnimationState(pointer)
         reset()
