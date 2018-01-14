@@ -3,8 +3,10 @@ CMAKE_MINIMUM_REQUIRED ( VERSION 3.6 )
 PROJECT ("Live2D-for-JVM")
 
 #Use JNI
+if(NOT ANDROID)
 find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
+endif()
 
 #Define GLES / GLAD
 if (NOT ANDROID AND NOT IOS AND NOT EMSCRIPTEN AND NOT RPI)
@@ -44,11 +46,11 @@ ${MemoryAccessJNI}/moe_leekcake_live2dforjvm_MemoryAccessJNI.h
 )
 
 #Define Core
-set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
+set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include"  CACHE STRING "Path to Live2D Cubism Core include directory for native development.")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
 
 #Define Components
-set(CSM_COMPONENTS_BUILD_GL_RENDERER ON)
+option(CSM_COMPONENTS_BUILD_GL_RENDERER "Enables OpenGL reference renderer." ON)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents)
 
@@ -62,9 +64,17 @@ add_library(
 	${Live2DCubismJNISource}
 )
 
+set(LIBS ${CSM_CORE_LIBS}
+${CSM_COMPONENTS_LIBS})
+
+# HACK  Prevent link errors on Android
+if (ANDROID)
+  #target_link_libraries(Live2DCubismJNI EGL GLESv2 android log)
+  list(APPEND LIBS EGL GLESv2 android log)
+endif ()
+
 target_link_libraries(Live2DCubismJNI 
-${CSM_CORE_LIBS}
-${CSM_COMPONENTS_LIBS}
+	${LIBS}
 )
 
 if (_USE_GLAD)
