@@ -7,11 +7,36 @@ import android.os.Bundle
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
 import moe.leekcake.live2dforjvm.type.*
+import moe.leekcake_live2dforjvm.sample.SampleGLApp
+import java.io.InputStream
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 
 class MainActivity : Activity() {
+    inner class AndroidGLApp: SampleGLApp() {
+        override val width: Float
+            get() = glView.measuredWidth.toFloat()
+        override val height: Float
+            get() = glView.measuredHeight.toFloat()
+
+        override fun generateTexture(fileName: String): Int {
+            return Utils.loadTexture( application.assets.open(fileName) )
+        }
+
+        override fun destroyTexture(id: Int) {
+            val ids = IntArray(1)
+            ids[0] = id
+
+            GLES20.glDeleteTextures(ids.size, ids, 0)
+        }
+
+        override fun openFile(fileName: String): InputStream {
+            return application.assets.open(fileName)
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         glView = GLSurfaceView(this)

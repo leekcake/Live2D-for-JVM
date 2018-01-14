@@ -1,3 +1,4 @@
 include ':library'
 include ':sample'
+include ':sample-windows'
 include ':sample-android'

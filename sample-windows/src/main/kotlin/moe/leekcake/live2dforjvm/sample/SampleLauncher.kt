@@ -4,6 +4,7 @@ import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
 import moe.leekcake.live2dforjvm.type.*
+import moe.leekcake_live2dforjvm.sample.SampleGLApp
 import org.lwjgl.Version
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
@@ -13,100 +14,38 @@ import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryStack.stackPush
 import org.lwjgl.system.MemoryUtil.NULL
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 
 //Quick copy start from https://www.lwjgl.org/guide
 class Sample {
     private val windowWidth = 405f
     private val windowHeight = 720f
 
-    private lateinit var moc: CubismMoc
-    private lateinit var model: CubismModel
-    private lateinit var table: CubismModelHashTable
+    inner class WindowsGLApp: SampleGLApp() {
+        override val width: Float
+            get() = windowWidth
+        override val height: Float
+            get() = windowHeight
 
-    private lateinit var animation: CubismAnimation
-    private lateinit var animationState: CubismAnimationState
-
-    private lateinit var renderer: CubismGLRenderer
-
-    private lateinit var texture: Texture
-
-    private lateinit var vp: FloatArray
-
-    //For better view, LWJGL Flow is not important for sample
-    private fun initCubism() {
-        //Load Cubism Example Model
-        val sampleFolder = File("../sample-hiyori")
-
-        moc = CubismMoc(File(sampleFolder, "hiyori.moc3"))
-        model = CubismModel(moc)
-        table = CubismModelHashTable(model)
-        val motionJson = File(sampleFolder, "hiyori_m01.motion3.json").readText()
-        animation = CubismAnimation(motionJson)
-        animationState = CubismAnimationState()
-
-        Live2DCubismGLRenderingJNI.ensureGLAD()
-        renderer = CubismGLRenderer(model)
-        texture = Texture.loadTexture(File(sampleFolder, "hiyori_texture.png").path)
-        vp = generateViewProjection(0.8f)
-
-        lastTime = System.currentTimeMillis()
-    }
-
-    private var lastTime: Long = 0
-
-    private fun loopCubism() {
-        val delta = (System.currentTimeMillis() - lastTime).toFloat() / 1000f
-        lastTime = System.currentTimeMillis();
-
-        animationState.update(delta)
-        animation.evaluate(animationState, Live2DCubismFrameworkJNI.getOverrideFloatBlendFunction(),
-                1f, model, table, CubismModel.AnimationCurveType.OpacityAnimationCurve, 0)
-
-        model.update()
-        renderer.update()
-
-        model.resetDrawableDynamicFlags()
-
-        renderer.draw(vp, texture.id.toLong())
-    }
-
-    private fun destroyCubism() {
-        texture.delete()
-
-        renderer.release()
-        animation.release()
-        table.release()
-        model.release()
-        moc.release()
-    }
-
-    private fun generateViewProjection(safeFrame: Float): FloatArray {
-        var aspect: Float
-        val xScale: Float
-        val yScale: Float
-
-        // Compute scale.
-        aspect = windowWidth / windowHeight
-
-        if (aspect > 1.0f) {
-            yScale = 1.0f / safeFrame * 2.0f
-            xScale = yScale * (1.0f / aspect)
-        } else {
-            aspect = windowHeight / windowWidth
-
-            xScale = 1.0f / safeFrame * 2.0f
-            yScale = xScale * (1.0f / aspect)
+        private fun convertFileName(fileName: String): String {
+            return File( "../sample-hiyori", fileName).path
         }
 
-        val vp = FloatArray(16)
-        // Set matrix.
-        vp[0] = xScale; vp[1] = 0.0f; vp[2] = 0.0f; vp[3] = 0.0f
-        vp[4] = 0.0f; vp[5] = yScale; vp[6] = 0.0f; vp[7] = 0.0f
-        vp[8] = 0.0f; vp[9] = 0.0f; vp[10] = 1.0f; vp[11] = 0.0f
-        vp[12] = 0.0f; vp[13] = 0.0f; vp[14] = 0.0f; vp[15] = 1.0f
+        override fun generateTexture(fileName: String): Int {
+            return Texture.loadTexture( convertFileName(fileName) ).id
+        }
 
-        return vp
+        override fun destroyTexture(id: Int) {
+            glDeleteTextures(id)
+        }
+
+        override fun openFile(fileName: String): InputStream {
+            return FileInputStream(convertFileName(fileName))
+        }
     }
+
+    private val app = WindowsGLApp()
 
     // The window handle
     private var window: Long = 0
@@ -117,7 +56,7 @@ class Sample {
 
         init()
         loop()
-        destroyCubism()
+        app.destroy()
 
         // Free the window callbacks and destroy the window
         glfwFreeCallbacks(window)
@@ -191,7 +130,7 @@ class Sample {
 
         // Make the window visible
         glfwShowWindow(window)
-        initCubism()
+        app.init()
     }
 
     private fun loop() {
@@ -199,7 +138,7 @@ class Sample {
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT)
-            loopCubism()
+            app.tick()
             glfwSwapBuffers(window) // swap the color buffers
 
             // Poll for window events. The key callback above will only be
