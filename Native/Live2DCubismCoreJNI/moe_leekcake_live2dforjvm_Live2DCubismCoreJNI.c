@@ -323,7 +323,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
-(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx, jlong out) {
+(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx) {
 	return (jlong)&csmGetDrawableVertexPositions((const csmModel*)model)[inx][vertexInx];
 }
 
@@ -333,7 +333,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDr
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
-(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx, jobject out) {
+(JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx) {
 	return (jlong)&csmGetDrawableVertexUvs((const csmModel*)model)[inx][vertexInx];
 }
 
