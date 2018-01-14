@@ -16,6 +16,9 @@ abstract class SampleGLApp {
     private lateinit var model: CubismModel
     private lateinit var table: CubismModelHashTable
 
+    private lateinit var physics: CubismPhysics
+    private lateinit var physicsOption: CubismPhysicsOptions
+
     private lateinit var animation: CubismAnimation
     private lateinit var animationState: CubismAnimationState
 
@@ -37,9 +40,20 @@ abstract class SampleGLApp {
         model = CubismModel(moc)
         table = CubismModelHashTable(model)
 
-        val jsonStream = openFile("hiyori_m01.motion3.json")
-        val motionJson = String(jsonStream.readBytes(jsonStream.available()))
-        jsonStream.close()
+        val physicsJsonStream = openFile("hiyori.physics3.json")
+        val physicsJson = String(physicsJsonStream.readBytes(physicsJsonStream.available()))
+        physicsJsonStream.close()
+
+        physics = CubismPhysics(physicsJson)
+        physicsOption = CubismPhysicsOptions()
+        physicsOption.gravity.x = 0f
+        physicsOption.gravity.y = -1f
+        physicsOption.wind.x = 2f
+        physicsOption.wind.y = 2f
+
+        val aniJsonStream = openFile("hiyori_m01.motion3.json")
+        val motionJson = String(aniJsonStream.readBytes(aniJsonStream.available()))
+        aniJsonStream.close()
 
         animation = CubismAnimation(motionJson)
         animationState = CubismAnimationState()
@@ -84,6 +98,8 @@ abstract class SampleGLApp {
     fun tick() {
         val delta = (System.currentTimeMillis() - lastTime).toFloat() / 1000f
         lastTime = System.currentTimeMillis();
+
+        physics.evaluate(model, physicsOption, delta)
 
         animationState.update(delta)
         animation.evaluate(animationState, Live2DCubismFrameworkJNI.getOverrideFloatBlendFunction(),
