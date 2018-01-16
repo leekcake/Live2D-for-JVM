@@ -9,6 +9,9 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 
+#Android Studio
+local.properties
+
 #Windows Build
 *.exp
 *.lib
