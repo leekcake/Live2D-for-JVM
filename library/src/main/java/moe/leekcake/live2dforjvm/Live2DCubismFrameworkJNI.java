@@ -13,6 +13,11 @@ public class Live2DCubismFrameworkJNI {
     //Physics Options Read Proxy for Java
     public static native long allocatePhysicsOptions();
 
+    //Animation Read Proxy for Java
+    public static native float getAnimationDuration(long animation);
+
+    public static native boolean getAnimationIsLoop(long animation);
+
     //Animation State Read Proxy for Java
     public static native long allocateAnimationState();
 
@@ -24,6 +29,14 @@ public class Live2DCubismFrameworkJNI {
     public static native int getUserDataSinkHashId(long sink);
 
     public static native String getUserDataSinkValue(long sink);
+
+    //CubismAnimationUserDataSink Read Proxy for java
+
+    public static native long allocateAnimationUserDataSink();
+
+    public static native float getAnimationUserDataSinkTime(long sink);
+
+    public static native String getAnimationUserDataValue(long sink);
 
     /**
      * @return pointer of Gravity Vector2
@@ -267,8 +280,4 @@ public class Live2DCubismFrameworkJNI {
     public static native int getAnimationUserDataCount(long animation);
 
     public static native void getAnimationUserData(long animation, int inx, long animationUserDataSink);
-
-    public static native void initializeAnimationUserDataCallback(long state, long callbackFunction);
-
-    public static native void updateAnimationUserDataCallbackUpdate(long state, long animationState, long animation);
 }

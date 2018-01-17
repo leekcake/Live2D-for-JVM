@@ -33,6 +33,22 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAnimationDuration
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationDuration
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAnimationIsLoop
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationIsLoop
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
  * Method:    allocateAnimationState
  * Signature: ()J
  */
@@ -69,6 +85,30 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_g
  * Signature: (J)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataSinkValue
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    allocateAnimationUserDataSink
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocateAnimationUserDataSink
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAnimationUserDataSinkTime
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationUserDataSinkTime
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getAnimationUserDataValue
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationUserDataValue
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -310,22 +350,6 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_g
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationUserData
   (JNIEnv *, jclass, jlong, jint, jlong);
-
-/*
- * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    initializeAnimationUserDataCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_initializeAnimationUserDataCallback
-  (JNIEnv *, jclass, jlong, jlong);
-
-/*
- * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
- * Method:    updateAnimationUserDataCallbackUpdate
- * Signature: (JJJ)V
- */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_updateAnimationUserDataCallbackUpdate
-  (JNIEnv *, jclass, jlong, jlong, jlong);
 
 #ifdef __cplusplus
 }
