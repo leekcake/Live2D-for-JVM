@@ -301,3 +301,84 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_p
 (JNIEnv * env, jclass obj, jlong model, jlong physics, jlong options, jfloat deltaTime) {
 	csmPhysicsEvaluate((csmModel*)model, (csmPhysicsRig*)physics, (csmPhysicsOptions*)options, deltaTime);
 }
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getDeserializedSizeofUserData
+* Signature: (Ljava/lang/String;)V
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getDeserializedSizeofUserData
+(JNIEnv * env, jclass obj, jstring json) {
+	return csmGetDeserializedSizeofUserData((*env)->GetStringUTFChars(env, json, (jboolean*)false));
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    deserializeUserDataInPlace
+* Signature: (Ljava/lang/String;JJ)J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_deserializeUserDataInPlace
+(JNIEnv * env, jclass obj, jstring json, jlong address, jlong size) {
+	return csmDeserializeUserDataInPlace((*env)->GetStringUTFChars(env, json, (jboolean*)false),
+		address, size);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getUserDataCount
+* Signature: (J)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataCount
+(JNIEnv * env, jclass obj, jlong userData) {
+	return csmGetUserDataCount(userData);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getUserData
+* Signature: (JIJ)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserData
+(JNIEnv * env, jclass obj, jlong userData, jint inx, jlong sink) {
+	csmGetUserData(userData, inx, sink);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getAnimationUserDataCount
+* Signature: (J)I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationUserDataCount
+(JNIEnv * env, jclass obj, jlong animation) {
+	return csmGetAnimationUserDataCount(animation);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getAnimationUserData
+* Signature: (JIJ)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getAnimationUserData
+(JNIEnv * env, jclass obj, jlong animation, jint inx, jlong sink) {
+	return csmGetAnimationUserData(animation, inx, sink);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    initializeAnimationUserDataCallback
+* Signature: (JJ)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_initializeAnimationUserDataCallback
+(JNIEnv * env, jclass obj, jlong state, jlong callback) {
+	csmInitializeAnimationUserDataCallback(state, callback);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    updateAnimationUserDataCallbackUpdate
+* Signature: (JJJ)V
+*/
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_updateAnimationUserDataCallbackUpdate
+(JNIEnv * env, jclass obj, jlong state, jlong animationState, jlong animation) {
+	csmUpdateAnimationUserDataCallbackUpdate(state, animationState, animation);
+}

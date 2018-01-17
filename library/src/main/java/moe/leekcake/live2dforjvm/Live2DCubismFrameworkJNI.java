@@ -247,4 +247,21 @@ public class Live2DCubismFrameworkJNI {
                                               long physics,
                                               long options,
                                               float deltaTime);
+
+    //TODO: Import or generate document below functions
+    public static native long getDeserializedSizeofUserData(String userDataJson);
+
+    public static native long deserializeUserDataInPlace(String userDataJson, long address, long size);
+
+    public static native int getUserDataCount(long userData);
+
+    public static native void getUserData(long userData, int inx, long userDataSink);
+
+    public static native int getAnimationUserDataCount(long animation);
+
+    public static native void getAnimationUserData(long animation, int inx, long animationUserDataSink);
+
+    public static native void initializeAnimationUserDataCallback(long state, long callbackFunction);
+
+    public static native void updateAnimationUserDataCallbackUpdate(long state, long animationState, long animation);
 }
