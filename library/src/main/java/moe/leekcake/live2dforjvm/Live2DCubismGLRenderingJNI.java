@@ -6,7 +6,7 @@ public class Live2DCubismGLRenderingJNI {
     }
 
     /**
-     * Use Framework using GLAD, call gladLoadGL
+     * if Platform using GLAD, call gladLoadGL
      */
     public static native void ensureGLAD();
 

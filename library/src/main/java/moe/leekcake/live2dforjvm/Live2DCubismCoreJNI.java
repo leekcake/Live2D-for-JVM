@@ -1,7 +1,5 @@
 package moe.leekcake.live2dforjvm;
 
-import kotlin.Suppress;
-
 /**
  * JNI Class for Live2DCubismCore
  */
@@ -11,6 +9,11 @@ public class Live2DCubismCoreJNI {
         registerCallback();
     }
 
+    /**
+     * Callback function for JNI, it simply print to standard output in now.
+     * @param message Received Message
+     */
+    @SuppressWarnings("unused")
     public static void logCallback(String message) {
         System.out.println(message);
     }
@@ -18,7 +21,7 @@ public class Live2DCubismCoreJNI {
     /**
      * Bind csmLog to logCallback
      */
-    public static native void registerCallback();
+    private static native void registerCallback();
 
     /**
      * Allocate new Vector2
@@ -29,12 +32,32 @@ public class Live2DCubismCoreJNI {
      */
     public static native long allocateVector2(float x, float y);
 
+    /**
+     * Get x value from Vector2
+     * @param vector Vector2
+     * @return x
+     */
     public static native float getVector2X(long vector);
 
+    /**
+     * Get y value from Vector2
+     * @param vector Vector2
+     * @return y
+     */
     public static native float getVector2Y(long vector);
 
+    /**
+     * Set x value from Vector2
+     * @param vector Vector2
+     * @param x x
+     */
     public static native void setVector2X(long vector, float x);
 
+    /**
+     * Set y value from Vector2
+     * @param vector Vector2
+     * @param y y
+     **/
     public static native void setVector2Y(long vector, float y);
 
 
@@ -79,8 +102,7 @@ public class Live2DCubismCoreJNI {
     //csmApi unsigned int csmGetSizeofModel(const csmMoc* moc);
 
     /**
-     * Get Size for Allocate Memory (for Initialize Model)
-     * //TODO: Better Comment...
+     * Get Memory size for Initialize Model
      *
      * @param moc csmMoc pointer
      * @return Size of Model
@@ -126,14 +148,13 @@ public class Live2DCubismCoreJNI {
      * @param model             csmModel pointer
      * @param outSizeInPixels   canvas size in pixels (Vector2)
      * @param outOriginInPixels origin size in pixels (Vector2)
-     * @return outPixelsPerUnit //TODO: Know about 'unit'
+     * @return outPixelsPerUnit
      */
     public static native float readCanvasInfo(long model, long outSizeInPixels, long outOriginInPixels);
 
     /* ---------- *
      * PARAMETERS *
      * ---------- */
-    //TODO: Complete Document?
 
     //csmApi int csmGetParameterCount(const csmModel* model);
 

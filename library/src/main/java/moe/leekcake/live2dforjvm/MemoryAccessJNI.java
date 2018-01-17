@@ -15,7 +15,14 @@ public class MemoryAccessJNI {
 
     public static native long allocateAligned(int size, int align);
 
-    //memory의 start 부분부터 시작해서 data의 offset부터 length까지의 데이터를 넣습니다
+    /**
+     * Put 'data'[offset ~ offset+Length] into 'memory'[start ~ start+Length]
+     * @param memory Dest Memory
+     * @param start Start Offset for Dest
+     * @param data Src Data
+     * @param dataOffset Data Offset
+     * @param dataLength Data Length to copy
+     */
     public static native void writeToMemory(long memory, int start, byte[] data, int dataOffset, int dataLength);
 
     public static native void deAllocate(long memory);
