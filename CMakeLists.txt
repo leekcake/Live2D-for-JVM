@@ -97,3 +97,13 @@ add_library(
 	SHARED
 	${MemoryAccessJNISource}
 )
+
+if (NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS AND NOT RPI)
+add_custom_command(TARGET Live2DCubismJNI 
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Live2DCubismJNI> ${CMAKE_CURRENT_SOURCE_DIR}/Native)
+				   
+add_custom_command(TARGET MemoryAccessJNI 
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:MemoryAccessJNI> ${CMAKE_CURRENT_SOURCE_DIR}/Native)
+endif()
