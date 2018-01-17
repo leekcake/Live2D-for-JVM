@@ -18,6 +18,13 @@ public class Live2DCubismFrameworkJNI {
 
     public static native float getAnimationStateTime(long state);
 
+    //CubismUserDataSink Read Proxy for java
+    public static native long allocateUserDataSink();
+
+    public static native int getUserDataSinkHashId(long sink);
+
+    public static native String getUserDataSinkValue(long sink);
+
     /**
      * @return pointer of Gravity Vector2
      */

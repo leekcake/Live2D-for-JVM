@@ -115,6 +115,36 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_g
 
 /*
 * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    allocateUserDataSink
+* Signature: ()J
+*/
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocateUserDataSink
+(JNIEnv * env, jclass obj) {
+	return malloc(sizeof(csmUserDataSink));
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getUserDataSinkHashId
+* Signature: ()I
+*/
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataSinkHashId
+(JNIEnv * env, jclass obj, jlong sink) {
+	return ((csmUserDataSink*)sink)->Id;
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+* Method:    getUserDataSinkValue
+* Signature: ()Ljava/lang/String;
+*/
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataSinkValue
+(JNIEnv * env, jclass obj, jlong sink) {
+	return (*env)->NewStringUTF(env, ((csmUserDataSink*)sink)->Value);
+}
+
+/*
+* Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
 * Method:    generateHashId
 * Signature: (Ljava/lang/String;)I
 */

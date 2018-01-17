@@ -49,6 +49,30 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
 
 /*
  * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    allocateUserDataSink
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_allocateUserDataSink
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getUserDataSinkHashId
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataSinkHashId
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
+ * Method:    getUserDataSinkValue
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI_getUserDataSinkValue
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI
  * Method:    getGravitiyPhysicsOptions
  * Signature: (J)J
  */
