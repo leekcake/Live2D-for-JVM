@@ -2,6 +2,7 @@ package moe.leekcake.live2dforjvm.type
 
 import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
 import moe.leekcake.live2dforjvm.MemoryAccessJNI
+import moe.leekcake.live2dforjvm.constraints.Alignment
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream

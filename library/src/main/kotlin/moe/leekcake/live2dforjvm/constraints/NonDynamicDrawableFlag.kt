@@ -1,4 +1,4 @@
-package moe.leekcake.live2dforjvm.type
+package moe.leekcake.live2dforjvm.constraints
 
 /**
  * BitMask for non-dynamic drawable flags.
