@@ -39,11 +39,13 @@ android {
     aaptOptions {
         noCompress 'png', 'moc3'
     }
+    /*
     externalNativeBuild {
         cmake {
             path rootProject.file('CMakeLists.txt').absolutePath
         }
     }
+    */
 }
 
 dependencies {
