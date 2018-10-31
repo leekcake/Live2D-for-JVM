@@ -24,15 +24,9 @@ endif ()
 
 #Define Live2DCubismJNI Source
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
-set(FrameworkJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI)
-set(GLRenderingJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismGLRenderingJNI)
 set(Live2DCubismJNISource
 	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.c
-	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h
-	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.c
-	${FrameworkJNI}/moe_leekcake_live2dforjvm_Live2DCubismFrameworkJNI.h
-	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.c
-	${GLRenderingJNI}/moe_leekcake_live2dforjvm_Live2DCubismGLRenderingJNI.h)
+	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h)
 	
 if(_USE_GLAD)
 		list(APPEND Live2DCubismJNISource ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/src/glad.c)
