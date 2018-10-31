@@ -8,19 +8,47 @@ find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
 endif()
 
-#Define GLES / GLAD
-if (NOT ANDROID AND NOT IOS AND NOT EMSCRIPTEN AND NOT RPI)
-  set(_DESKTOP ON)
-endif ()
-# Set glad flag on desktop.
-if (_DESKTOP)
-  set(_USE_GLAD ON)
-  set(CSM_COMPONENTS_GL_H "${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/include/glad/glad.h" CACHE STRING "" FORCE)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/include)
-# ... and OpenGL ES 2.0 flag else.
-else ()
-  set(_USE_GLES20 ON)
-endif ()
+if(WIN32)
+	set(FRAMEWORK_DEFINITIOINS
+		-DCSM_TARGET_WIN_GL
+		-DGLEW_STATIC
+	)
+	
+	# Visual Studioのソリューション生成
+	if (CMAKE_GENERATOR_PLATFORM STREQUAL "x64" AND CMAKE_GENERATOR MATCHES "Visual Studio 14 2015")
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86_64/140)
+
+	elseif (CMAKE_GENERATOR_PLATFORM STREQUAL "x64" AND CMAKE_GENERATOR MATCHES "Visual Studio 12 2013")
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86_64/120)
+
+	elseif (CMAKE_GENERATOR_PLATFORM STREQUAL "Win32" AND CMAKE_GENERATOR MATCHES "Visual Studio 14 2015")
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86/140)
+
+	elseif (CMAKE_GENERATOR_PLATFORM STREQUAL "Win32" AND CMAKE_GENERATOR MATCHES "Visual Studio 12 2013")
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86/120)
+
+	# NMake MakeFiles指定
+	elseif (CMAKE_GENERATOR MATCHES "NMake Makefiles" AND MSVC_VERSION MATCHES 1900 AND CMAKE_EXE_LINKER_FLAGS STREQUAL "/machine:x64" )
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86_64/140)
+
+	elseif (CMAKE_GENERATOR MATCHES "NMake Makefiles" AND MSVC_VERSION MATCHES 1900 )
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86/140)
+
+	elseif (CMAKE_GENERATOR MATCHES "NMake Makefiles" AND MSVC_VERSION MATCHES 1800 AND CMAKE_EXE_LINKER_FLAGS STREQUAL "/machine:x64" )
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86_64/120)
+
+	elseif (CMAKE_GENERATOR MATCHES "NMake Makefiles" AND MSVC_VERSION MATCHES 1800 )
+		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86/120)
+	endif () 
+endif()
+
+#glew_s
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0/build/cmake)
+#glfw
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glfw-3.2.1)
+
+set(FRAMEWORK_GLFW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glfw-3.2.1/include)
+set(FRAMEWORK_GLEW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0/include)
 
 #Define Live2DCubismJNI Source
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
@@ -28,10 +56,6 @@ set(Live2DCubismJNISource
 	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.c
 	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h)
 	
-if(_USE_GLAD)
-		list(APPEND Live2DCubismJNISource ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents/sample/vendor/glad/src/glad.c)
-endif()
-
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
 #Define MemoryAccessJNI
 set(MemoryAccessJNISource
@@ -44,13 +68,8 @@ set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Native/Cu
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
 
 #Define Components
-option(CSM_COMPONENTS_BUILD_GL_RENDERER "Enables OpenGL reference renderer." ON)
 
-if (_DESKTOP)
-  set(CSM_COMPONENTS_GL_H "${CMAKE_CURRENT_LIST_DIR}/Native/CubismNativeComponents/sample/vender/glad/include/glad/glad.h" CACHE STRING "")
-endif ()
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeComponents)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework)
 
 include_directories(  ${CSM_CORE_INCLUDE_DIR}
   ${CSM_COMPONENTS_INCLUDE_DIR}
@@ -63,7 +82,9 @@ add_library(
 )
 
 set(LIBS ${CSM_CORE_LIBS}
-${CSM_COMPONENTS_LIBS})
+${commonfiles})
+
+message(${CSM_CORE_LIBS})
 
 # HACK  Prevent link errors on Android
 if (ANDROID)
@@ -75,13 +96,6 @@ target_link_libraries(Live2DCubismJNI
 	${LIBS}
 )
 
-if (_USE_GLAD)
-  set(_DEFINITIONS -D_USE_GLAD)
-else (_USE_GLES20)
-  set(_DEFINITIONS -D_USE_GLES20)
-endif ()
-target_compile_definitions(Live2DCubismJNI PRIVATE ${_DEFINITIONS})
-
 if (CSM_CORE_DEPS)
   add_dependencies(Live2DCubismJNI ${CSM_CORE_DEPS})
 endif ()
@@ -92,6 +106,7 @@ add_library(
 	${MemoryAccessJNISource}
 )
 
+#Copy Result when Desktop
 if (NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS AND NOT RPI)
 add_custom_command(TARGET Live2DCubismJNI 
                    POST_BUILD
