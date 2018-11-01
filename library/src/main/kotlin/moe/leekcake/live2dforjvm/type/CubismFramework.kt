@@ -3,29 +3,29 @@ package moe.leekcake.live2dforjvm.type
 import moe.leekcake.live2dforjvm.framework.CubismFrameworkJNI
 
 object CubismFramework {
-    fun StartUp() {
+    fun startUp() {
         CubismFrameworkJNI.CubismFramework_StartUp()
     }
 
-    fun CleanUp() {
+    fun cleanUp() {
         CubismFrameworkJNI.CubismFramework_CleanUp()
     }
 
-    fun IsStarted(): Boolean = CubismFrameworkJNI.CubismFramework_IsStarted()
+    fun isStarted(): Boolean = CubismFrameworkJNI.CubismFramework_IsStarted()
 
-    fun Initialize() {
+    fun initialize() {
         CubismFrameworkJNI.CubismFramework_Initialize()
     }
 
-    fun Dispose() {
+    fun dispose() {
         CubismFrameworkJNI.CubismFramework_Dispose()
     }
 
-    fun IsInitialized(): Boolean {
+    fun isInitialized(): Boolean {
         return CubismFrameworkJNI.CubismFramework_IsInitialized()
     }
 
-    fun GetIdManager(): CubismIdManager {
+    fun getIdManager(): CubismIdManager {
         return CubismIdManager(CubismFrameworkJNI.CubismFramework_GetIdManager())
     }
 }
