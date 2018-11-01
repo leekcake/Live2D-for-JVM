@@ -1,4 +1,4 @@
-package moe.leekcake.live2dforjvm.type
+package moe.leekcake.live2dforjvm.framework.type
 
 import moe.leekcake.live2dforjvm.framework.CubismIdManagerJNI
 

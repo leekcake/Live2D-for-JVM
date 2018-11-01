@@ -1,4 +1,4 @@
-package moe.leekcake.live2dforjvm.constraints
+package moe.leekcake.live2dforjvm.framework.constraints
 
 //CubismDefaultParameterId
 object DefaultParameterId {
