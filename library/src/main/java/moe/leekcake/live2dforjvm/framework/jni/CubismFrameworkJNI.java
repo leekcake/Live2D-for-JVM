@@ -1,4 +1,4 @@
-package moe.leekcake.live2dforjvm.framework;
+package moe.leekcake.live2dforjvm.framework.jni;
 
 public class CubismFrameworkJNI {
     static {

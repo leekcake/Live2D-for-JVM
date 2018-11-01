@@ -1,4 +1,4 @@
-apply plugin: 'kotlin'
+apply plugin: 'java'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -33,7 +33,7 @@ task generateJniHeaders() {
             executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
             args "-d", memoryDir.path
             args "-classpath", classpath
-            args "moe.leekcake.live2dforjvm.MemoryAccessJNI"
+            args "moe.leekcake.live2dforjvm.core.jni.MemoryAccessJNI"
         }
 
         exec {
@@ -52,8 +52,4 @@ task generateJniHeaders() {
     }
 
     dependsOn classes
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

@@ -1,4 +1,4 @@
-package moe.leekcake.live2dforjvm;
+package moe.leekcake.live2dforjvm.core.jni;
 
 /**
  * JNI Class for Live2DCubismCore

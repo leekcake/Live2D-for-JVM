@@ -2,7 +2,7 @@ package moe.leekcake_live2dforjvm.sample
 
 import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
 import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
-import moe.leekcake.live2dforjvm.type.*
+import moe.leekcake.live2dforjvm.core.type.CubismMoc
 import java.io.InputStream
 
 abstract class SampleGLApp {
