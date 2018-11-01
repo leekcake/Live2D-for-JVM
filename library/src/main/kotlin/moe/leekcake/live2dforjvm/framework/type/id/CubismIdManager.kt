@@ -1,6 +1,6 @@
-package moe.leekcake.live2dforjvm.framework.type
+package moe.leekcake.live2dforjvm.framework.type.id
 
-import moe.leekcake.live2dforjvm.framework.CubismIdManagerJNI
+import moe.leekcake.live2dforjvm.framework.id.CubismIdManagerJNI
 
 class CubismIdManager(val pointer: Long) {
     fun registerIds(ids: Array<String>) {

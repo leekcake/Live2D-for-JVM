@@ -1,6 +1,7 @@
 package moe.leekcake.live2dforjvm.framework.type
 
 import moe.leekcake.live2dforjvm.framework.CubismFrameworkJNI
+import moe.leekcake.live2dforjvm.framework.type.id.CubismIdManager
 
 object CubismFramework {
     fun startUp() {
