@@ -1,4 +1,4 @@
-#include "moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h"
+#include "moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI.h"
 #include <stdlib.h>
 #include <Live2DCubismCore.h>
 
@@ -14,7 +14,7 @@ void callback(const char* message) {
 	(*env)->CallStaticVoidMethod(env, callbackClass, callbackMethodId, (*env)->NewStringUTF(env, message));
 }
 
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_registerCallback
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_registerCallback
 (JNIEnv * env, jclass obj) {
 	(*env)->GetJavaVM(env, &vm);
 	csmSetLogFunction(callback);
@@ -22,11 +22,11 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_regist
 }
 
 /*
-* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Class:     moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI
 * Method:    allocateVector2
 * Signature: (FF)J
 */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_allocateVector2
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_allocateVector2
 (JNIEnv * env, jclass obj, jfloat x, jfloat y) {
 	csmVector2* vector = malloc(sizeof(csmVector2));
 	vector->X = x;
@@ -35,41 +35,41 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_alloc
 }
 
 /*
-* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Class:     moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI
 * Method:    getVector2X
 * Signature: (J)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2X
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getVector2X
 (JNIEnv * env, jclass obj, jlong vector) {
 	return ((csmVector2*)vector)->X;
 }
 
 /*
-* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Class:     moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI
 * Method:    getVector2Y
 * Signature: (J)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVector2Y
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getVector2Y
 (JNIEnv * env, jclass obj, jlong vector) {
 	return ((csmVector2*)vector)->Y;
 }
 
 /*
-* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Class:     moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI
 * Method:    setVector2X
 * Signature: (JF)V
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2X
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_setVector2X
 (JNIEnv * env, jclass obj, jlong vector, jfloat value) {
 	((csmVector2*)vector)->X = value;
 }
 
 /*
-* Class:     moe_leekcake_live2dforjvm_Live2DCubismCoreJNI
+* Class:     moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI
 * Method:    setVector2Y
 * Signature: (JF)V
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVector2Y
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_setVector2Y
 (JNIEnv * env, jclass obj, jlong vector, jfloat value) {
 	((csmVector2*)vector)->Y = value;
 }
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_setVec
  * Method:    GetVersion
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVersion
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getVersion
 (JNIEnv * env, jclass obj) {
 	return csmGetVersion();
 }
@@ -89,7 +89,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getVe
  * Method:    ReviveMocInPlace
  * Signature: (JJ)J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_reviveMocInPlace
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_reviveMocInPlace
 (JNIEnv * env, jclass obj, jlong address, jlong size) {
 	return (jlong)csmReviveMocInPlace((void*)address, size);
 }
@@ -99,7 +99,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_reviv
  * Method:    GetSizeofModel
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getSizeofModel
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getSizeofModel
 (JNIEnv * env, jclass obj, jlong moc) {
 	return csmGetSizeofModel((const csmMoc*)moc);
 }
@@ -109,7 +109,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getSi
  * Method:    InitializeModelInPlace
  * Signature: (JJJ)J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_initializeModelInPlace
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_initializeModelInPlace
 (JNIEnv * env, jclass obj, jlong moc, jlong address, jlong size) {
 	return (jlong)csmInitializeModelInPlace((const csmMoc*)moc, (void*)address, size);
 }
@@ -119,7 +119,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_initi
  * Method:    UpdateModel
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_updateModel
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_updateModel
 (JNIEnv * env, jclass obj, jlong model) {
 	csmUpdateModel((csmModel*)model);
 }
@@ -129,7 +129,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_update
  * Method:    ReadCanvasInfo
  * Signature: (JLmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;)F
  */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_readCanvasInfo
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_readCanvasInfo
 (JNIEnv * env, jclass obj, jlong model, jlong size, jlong origin) {
 	float perUnit;
 	csmReadCanvasInfo((csmModel*)model, (csmVector2*)size, (csmVector2*)origin, &perUnit);
@@ -141,7 +141,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_read
  * Method:    GetParameterCount
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterCount
 (JNIEnv * env, jclass obj, jlong model) {
 	return csmGetParameterCount((const csmModel*)model);
 }
@@ -151,7 +151,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPar
 * Method:    GetParameterId
 * Signature: (JI)Ljava/lang/String;
 */
-JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterId
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return (*env)->NewStringUTF(env, csmGetParameterIds((const csmModel*)model)[inx]);
 }
@@ -161,7 +161,7 @@ JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_get
 * Method:    GetParameterMinimumValue
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterMinimumValue
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterMinimumValue
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetParameterMinimumValues((const csmModel*)model)[inx];
 }
@@ -171,7 +171,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getP
 * Method:    GetParameterMaximumValue
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterMaximumValue
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterMaximumValue
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetParameterMaximumValues((const csmModel*)model)[inx];
 }
@@ -181,7 +181,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getP
 * Method:    GetParameterDefaultValue
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterDefaultValue
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterDefaultValue
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetParameterDefaultValues((const csmModel*)model)[inx];
 }
@@ -191,7 +191,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getP
 * Method:    GetParameterValue
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getParameterValue
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getParameterValue
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetParameterValues((csmModel*)model)[inx];
 }
@@ -201,7 +201,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getP
 * Method:    GetPartCount
 * Signature: (J)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPartCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getPartCount
 (JNIEnv * env, jclass obj, jlong model) {
 	return csmGetPartCount((const csmModel*)model);
 }
@@ -211,7 +211,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPar
 * Method:    GetPartId
 * Signature: (JI)Ljava/lang/String;
 */
-JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPartId
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getPartId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return (*env)->NewStringUTF(env, csmGetPartIds((const csmModel*)model)[inx]);
 }
@@ -221,7 +221,7 @@ JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_get
 * Method:    GetPartOpacity
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getPartOpacity
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getPartOpacity
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetPartOpacities((csmModel*)model)[inx];
 }
@@ -231,7 +231,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getP
 * Method:    GetDrawableCount
 * Signature: (J)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableCount
 (JNIEnv * env, jclass obj, jlong model) {
 	return csmGetDrawableCount((const csmModel*)model);
 }
@@ -241,7 +241,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableId
 * Signature: (JI)Ljava/lang/String;
 */
-JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableId
+JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableId
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return (*env)->NewStringUTF(env, csmGetDrawableIds((const csmModel*)model)[inx]);
 }
@@ -251,7 +251,7 @@ JNIEXPORT jstring JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_get
 * Method:    GetDrawableConstantFlag
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableConstantFlag
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableConstantFlag
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableConstantFlags((const csmModel*)model)[inx];
 }
@@ -261,7 +261,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableDynamicFlag
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableDynamicFlag
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableDynamicFlag
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableDynamicFlags((const csmModel*)model)[inx];
 }
@@ -271,7 +271,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableTextureIndex
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableTextureIndex
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableTextureIndex
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableTextureIndices((const csmModel*)model)[inx];
 }
@@ -281,7 +281,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableDrawOrder
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableDrawOrder
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableDrawOrder
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableDrawOrders((const csmModel*)model)[inx];
 }
@@ -291,7 +291,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableRenderOrder
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableRenderOrder
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableRenderOrder
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableRenderOrders((const csmModel*)model)[inx];
 }
@@ -301,7 +301,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableOpacity
 * Signature: (JI)F
 */
-JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableOpacity
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableOpacity
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableOpacities((const csmModel*)model)[inx];
 }
@@ -311,7 +311,7 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getD
 * Method:    GetDrawableMaskCount
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableMaskCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableMaskCount
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableMaskCounts((const csmModel*)model)[inx];
 }
@@ -321,7 +321,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableMask
 * Signature: (JII)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableMask
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableMask
 (JNIEnv * env, jclass obj, jlong model, jint inx, jint maskInx) {
 	return csmGetDrawableMasks((const csmModel*)model)[inx][maskInx];
 }
@@ -331,7 +331,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableVertexCount
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableVertexCount
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableVertexCounts((const csmModel*)model)[inx];
 }
@@ -341,7 +341,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableVertexPosition
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexPosition
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableVertexPosition
 (JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx) {
 	return (jlong)&csmGetDrawableVertexPositions((const csmModel*)model)[inx][vertexInx];
 }
@@ -351,7 +351,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDr
 * Method:    GetDrawableVertexUv
 * Signature: (JII)Lmoe/leekcake/live2d_for_java/Live2DType/CSMVector2;
 */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableVertexUv
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableVertexUv
 (JNIEnv * env, jclass obj, jlong model, jint inx, jint vertexInx) {
 	return (jlong)&csmGetDrawableVertexUvs((const csmModel*)model)[inx][vertexInx];
 }
@@ -361,7 +361,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDr
 * Method:    GetDrawableIndexCount
 * Signature: (JI)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableIndexCount
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableIndexCount
 (JNIEnv * env, jclass obj, jlong model, jint inx) {
 	return csmGetDrawableIndexCounts((const csmModel*)model)[inx];
 }
@@ -371,7 +371,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    GetDrawableIndex
 * Signature: (JII)I
 */
-JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDrawableIndex
+JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_getDrawableIndex
 (JNIEnv * env, jclass obj, jlong model, jint inx, jint Indexinx) {
 	return csmGetDrawableIndices((const csmModel*)model)[inx][Indexinx];
 }
@@ -381,7 +381,7 @@ JNIEXPORT jint JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_getDra
 * Method:    ResetDrawableDynamicFlags
 * Signature: (J)V
 */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_Live2DCubismCoreJNI_resetDrawableDynamicFlags
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI_resetDrawableDynamicFlags
 (JNIEnv * env, jclass obj, jlong model) {
 	return csmResetDrawableDynamicFlags((csmModel*)model);
 }

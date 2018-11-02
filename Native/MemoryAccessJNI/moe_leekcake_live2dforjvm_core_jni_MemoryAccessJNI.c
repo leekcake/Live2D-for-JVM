@@ -9,7 +9,7 @@
  * Method:    allocate
  * Signature: (I)J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_allocate
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI_allocate
 (JNIEnv * env, jclass obj, jint size) {
 	return (jlong)malloc(size);
 }
@@ -19,7 +19,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_allocate
  * Method:    allocateAligned
  * Signature: (II)J
  */
-JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_allocateAligned
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI_allocateAligned
 (JNIEnv * env, jclass obj, jint size, jint alignment) {
 	size_t offset, shift, alignedAddress;
 	void *allocation, ** preamble;
@@ -55,7 +55,7 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_allocateA
  * Method:    writeToMemory
  * Signature: (JI[BII)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_writeToMemory
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI_writeToMemory
 (JNIEnv * env, jclass obj, jlong memory, jint start, jbyteArray data, jint dataStart, jint dataLength) {
 	jbyte* bufferPtr = (*env)->GetByteArrayElements(env, data, NULL);
 
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_writeToMem
  * Method:    deAllocate
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_deAllocate
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI_deAllocate
 (JNIEnv * env, jclass obj, jlong memory) {
 	free((void*)memory);
 }
@@ -77,7 +77,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_deAllocate
  * Method:    deAllocateAligned
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_MemoryAccessJNI_deAllocateAligned
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI_deAllocateAligned
 (JNIEnv * env, jclass obj, jlong memory) {
 	void **preamble;
 	preamble = (void**)memory;
