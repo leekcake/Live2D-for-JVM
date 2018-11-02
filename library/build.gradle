@@ -6,6 +6,8 @@ apply plugin: 'java'
 //noinspection GroovyAssignabilityCheck
 task generateJniHeaders() {
     def classpath = sourceSets.main.output.asPath
+    def classesDir = sourceSets.main.output.classesDirs[0];
+
     def coreDir = new File(project.rootDir, "Native/Live2DCubismCoreJNI")
     coreDir.mkdirs()
 
@@ -15,18 +17,50 @@ task generateJniHeaders() {
     def frameworkDir = new File(project.rootDir, "Native/Live2DCubismFrameworkJNI")
     frameworkDir.mkdirs()
 
-    def glDir = new File(project.rootDir, "Native/Live2DCubismGLRenderingJNI")
-    glDir.mkdirs()
-
 //    def nativeIncludes = "src/native/include"
     //System.println("javah -d ${outputDir.path} -classpath $classpath moe.leekcake.live2dforjvm.Live2DCubismCoreJNI")
 
     doLast {
+        project.ext.lookFile = { File file ->
+           file.listFiles().each { File subFile ->
+               if(subFile.isDirectory()) {
+                   project.ext.lookFile.lookFile(subFile)
+               }
+               else {
+                   def relativeFile = subFile.absolutePath.replace(classesDir.path, "")
+                   def relativeFolderTrim = file.absolutePath.replace(classesDir.path, "").replace( "moe/leekcake/live2dforjvm/framework/jni".replace("/", File.separator), "")
+
+                   def outTo = new File(frameworkDir, relativeFolderTrim)
+                   def cls = relativeFile.replace(File.separator, ".")
+                   if(cls.startsWith(".")) {
+                       cls = cls.substring(1, cls.length());
+                   }
+                   if(cls.endsWith(".class")) {
+                       cls = cls.substring(0, cls.length() - 6)
+                   }
+                   if(cls.endsWith("JNI")) {
+                       println("Output to: " + outTo.path)
+                       println("Target class: " + cls)
+                       project.exec {
+                           executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
+                           args "-d", outTo.path
+                           args "-classpath", classpath
+                           args cls
+                       }
+                   }
+                   else
+                   {
+                       println(cls + " is Ignored because not ended JNI!")
+                   }
+               }
+           }
+        }
+
         exec {
             executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
             args "-d", coreDir.path
             args "-classpath", classpath
-            args "moe.leekcake.live2dforjvm.Live2DCubismCoreJNI"
+            args "moe.leekcake.live2dforjvm.core.jni.Live2DCubismCoreJNI"
         }
 
         exec {
@@ -36,19 +70,9 @@ task generateJniHeaders() {
             args "moe.leekcake.live2dforjvm.core.jni.MemoryAccessJNI"
         }
 
-        exec {
-            executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
-            args "-d", frameworkDir.path
-            args "-classpath", classpath
-            args "moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI"
-        }
 
-        exec {
-            executable org.gradle.internal.jvm.Jvm.current().getExecutable("javah")
-            args "-d", glDir.path
-            args "-classpath", classpath
-            args "moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI"
-        }
+        def frameworkClasses = new File(sourceSets.main.output.classesDirs[0], "moe/leekcake/live2dforjvm/framework/jni/");
+        project.ext.lookFile(frameworkClasses)
     }
 
     dependsOn classes
