@@ -5,11 +5,11 @@ public class CubismIdManagerJNI {
         System.loadLibrary("Live2DCubismJNI");
     }
 
-    public static native void CubismIdManager_RegisterIds(long manager, String[] ids);
+    public static native void RegisterIds(long manager, String[] ids);
 
-    public static native void CubismIdManager_RegisterId(long manager, String id);
+    public static native void RegisterId(long manager, String id);
 
-    public static native long CubismIdManager_GetId(long manager, String id);
+    public static native long GetId(long manager, String id);
 
-    public static native boolean CubismIdManager_IsExist(long manager, String id);
+    public static native boolean IsExist(long manager, String id);
 }

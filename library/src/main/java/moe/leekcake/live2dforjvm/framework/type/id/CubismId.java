@@ -9,6 +9,6 @@ public class CubismId extends AutoPointer {
     }
 
     public String getString() {
-        return CubismIdJNI.CubismId_GetString(pointer);
+        return CubismIdJNI.GetString(pointer);
     }
 }

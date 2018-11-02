@@ -9,18 +9,18 @@ public class CubismIdManager extends AutoPointer {
     }
 
     public void registerIds(String[] ids) {
-        CubismIdManagerJNI.CubismIdManager_RegisterIds(pointer, ids);
+        CubismIdManagerJNI.RegisterIds(pointer, ids);
     }
 
     public void registerId(String id) {
-        CubismIdManagerJNI.CubismIdManager_RegisterId(pointer, id);
+        CubismIdManagerJNI.RegisterId(pointer, id);
     }
 
     public CubismId getId(String id) {
-        return new CubismId(CubismIdManagerJNI.CubismIdManager_GetId(pointer, id));
+        return new CubismId(CubismIdManagerJNI.GetId(pointer, id));
     }
 
     public boolean isExist(String id) {
-        return CubismIdManagerJNI.CubismIdManager_IsExist(pointer, id);
+        return CubismIdManagerJNI.IsExist(pointer, id);
     }
 }

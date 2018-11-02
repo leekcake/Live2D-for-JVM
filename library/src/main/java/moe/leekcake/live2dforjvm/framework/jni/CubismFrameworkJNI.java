@@ -5,17 +5,17 @@ public class CubismFrameworkJNI {
         System.loadLibrary("Live2DCubismJNI");
     }
 
-    public static native boolean CubismFramework_StartUp();
+    public static native boolean StartUp();
 
-    public static native void CubismFramework_CleanUp();
+    public static native void CleanUp();
 
-    public static native boolean CubismFramework_IsStarted();
+    public static native boolean IsStarted();
 
-    public static native void CubismFramework_Initialize();
+    public static native void Initialize();
 
-    public static native void CubismFramework_Dispose();
+    public static native void Dispose();
 
-    public static native boolean CubismFramework_IsInitialized();
+    public static native boolean IsInitialized();
 
-    public static native long CubismFramework_GetIdManager();
+    public static native long GetIdManager();
 }

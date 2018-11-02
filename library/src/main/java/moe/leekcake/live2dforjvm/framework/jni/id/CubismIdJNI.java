@@ -5,5 +5,5 @@ public class CubismIdJNI {
         System.loadLibrary("Live2DCubismJNI");
     }
 
-    public static native String CubismId_GetString(long id);
+    public static native String GetString(long id);
 }

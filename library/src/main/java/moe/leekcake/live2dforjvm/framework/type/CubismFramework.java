@@ -5,30 +5,30 @@ import moe.leekcake.live2dforjvm.framework.type.id.CubismIdManager;
 
 public class CubismFramework {
     public static void startUp() {
-        CubismFrameworkJNI.CubismFramework_StartUp();
+        CubismFrameworkJNI.StartUp();
     }
 
     public static void cleanUp() {
-        CubismFrameworkJNI.CubismFramework_CleanUp();
+        CubismFrameworkJNI.CleanUp();
     }
 
     public static boolean isStarted() {
-        return CubismFrameworkJNI.CubismFramework_IsStarted();
+        return CubismFrameworkJNI.IsStarted();
     }
 
     public static void initialize() {
-        CubismFrameworkJNI.CubismFramework_Initialize();
+        CubismFrameworkJNI.Initialize();
     }
 
     public static void dispose() {
-        CubismFrameworkJNI.CubismFramework_Dispose();
+        CubismFrameworkJNI.Dispose();
     }
 
     public static boolean isInitialized() {
-        return CubismFrameworkJNI.CubismFramework_IsInitialized();
+        return CubismFrameworkJNI.IsInitialized();
     }
 
     public static CubismIdManager getIdManager() {
-        return new CubismIdManager(CubismFrameworkJNI.CubismFramework_GetIdManager());
+        return new CubismIdManager(CubismFrameworkJNI.GetIdManager());
     }
 }
