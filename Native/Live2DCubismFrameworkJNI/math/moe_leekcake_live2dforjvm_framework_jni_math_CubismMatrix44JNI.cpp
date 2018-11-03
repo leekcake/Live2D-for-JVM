@@ -143,7 +143,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TranslateRelative
-  (JNIEnv * env, jclass obj, jlong, jfloat, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x, jfloat y) {
+	((CubismMatrix44*)matrix)->TranslateRelative(x, y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
