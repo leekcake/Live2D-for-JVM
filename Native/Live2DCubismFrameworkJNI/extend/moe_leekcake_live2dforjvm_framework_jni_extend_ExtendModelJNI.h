@@ -98,10 +98,10 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
  * Method:    HitTest
- * Signature: (JFF)Z
+ * Signature: (JLjava/lang/String;FF)Z
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_HitTest
-  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+  (JNIEnv *, jclass, jlong, jstring, jfloat, jfloat);
 
 #ifdef __cplusplus
 }

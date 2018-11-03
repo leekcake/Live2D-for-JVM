@@ -12,6 +12,7 @@
 #include <ICubismModelSetting.hpp>
 #include <Type/csmRectF.hpp>
 
+using JavaModelEventFunction = void(*)(void* data, const char* value);
 
 /**
  * @brief ユーザーが実際に使用するモデルの実装クラス<br>
@@ -105,6 +106,8 @@ public:
      */
     virtual Csm::csmBool HitTest(const Csm::csmChar* hitAreaName, Csm::csmFloat32 x, Csm::csmFloat32 y);
 
+	void SetMotionEventHandler(JavaModelEventFunction function, void* data);
+
 protected:
     /**
      *  @brief  モデルを描画する処理。モデルを描画する空間のView-Projection行列を渡す。
@@ -173,6 +176,9 @@ private:
     const Csm::CubismId* _idParamBodyAngleX; ///< パラメータID: ParamBodyAngleX
     const Csm::CubismId* _idParamEyeBallX; ///< パラメータID: ParamEyeBallX
     const Csm::CubismId* _idParamEyeBallY; ///< パラメータID: ParamEyeBallXY
+
+	JavaModelEventFunction _motionEventCallback;
+	void* _motionEventCallbackData;
 };
 
 

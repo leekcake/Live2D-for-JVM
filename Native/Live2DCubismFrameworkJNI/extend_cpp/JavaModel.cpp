@@ -531,6 +531,16 @@ csmBool JavaModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 
     return false; // 存在しない場合はfalse
 }
 
+void JavaModel::SetMotionEventHandler(JavaModelEventFunction function, void * data)
+{
+	if (_motionEventCallbackData != NULL) {
+		delete _motionEventCallbackData;
+	}
+
+	_motionEventCallback = function;
+	_motionEventCallbackData = data;
+}
+
 void JavaModel::SetExpression(const csmChar* expressionID)
 {
     ACubismMotion* motion = _expressions[expressionID];
@@ -610,5 +620,8 @@ void JavaModel::SetupTextures()
 
 void JavaModel::MotionEventFired(const csmString& eventValue)
 {
+	if (_motionEventCallback != NULL) {
+		_motionEventCallback(_motionEventCallbackData, eventValue.GetRawString());
+	}
     CubismLogInfo("%s is fired on JavaModel!!", eventValue.GetRawString());
 }

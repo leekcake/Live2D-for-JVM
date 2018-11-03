@@ -171,4 +171,3 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
 }
 #endif
 #endif
-
