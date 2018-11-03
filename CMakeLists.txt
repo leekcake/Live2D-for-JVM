@@ -74,6 +74,9 @@ set(Live2DCubismJNISource
 	
 	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI.cpp
 	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI.h
+	
+	${FrameworkJNI}/extend_cpp/JavaAllocator.cpp
+	${FrameworkJNI}/extend_cpp/JavaAllocator.hpp
 	)
 	
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
@@ -98,6 +101,7 @@ add_library(
 
 target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
 target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework/src)
+target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI/extend_cpp)
 
 set(LIBS ${CSM_CORE_LIBS} Framework)
 
