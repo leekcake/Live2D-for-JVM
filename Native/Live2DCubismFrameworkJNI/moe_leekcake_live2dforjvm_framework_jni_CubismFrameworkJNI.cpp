@@ -1,5 +1,9 @@
 #include <jni.h>
 #include "moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI.h"
+#include <CubismFramework.hpp>
+#include <JavaAllocator.hpp>
+
+using namespace Live2D::Cubism::Framework;
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -7,7 +11,9 @@
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_StartUp
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	CubismFramework::StartUp(new JavaAllocator(), NULL);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -15,7 +21,9 @@ JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFr
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_CleanUp
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	CubismFramework::CleanUp();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -23,7 +31,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFramew
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_IsStarted
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	return CubismFramework::IsStarted();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -31,7 +41,9 @@ JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFr
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_Initialize
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	CubismFramework::Initialize();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -39,7 +51,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFramew
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_Dispose
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	CubismFramework::Dispose();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -47,7 +61,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFramew
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_IsInitialized
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	return CubismFramework::IsInitialized();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI
@@ -55,4 +71,6 @@ JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFr
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_GetIdManager
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	return (jlong) CubismFramework::GetIdManager();
+}
