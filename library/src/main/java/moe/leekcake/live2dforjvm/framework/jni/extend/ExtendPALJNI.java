@@ -15,10 +15,17 @@ public class ExtendPALJNI {
     public interface TextureProvider {
         int GetTexture(String path);
     }
-
     private static TextureProvider textureProvider = null;
     public static void setTextureProvider(TextureProvider textureProvider) {
         ExtendPALJNI.textureProvider = textureProvider;
+    }
+
+    public interface FileProvider {
+        byte[] readFile(String path);
+    }
+    private static FileProvider fileProvider = null;
+    public static void setFileProvider(FileProvider fileProvider) {
+        ExtendPALJNI.fileProvider = fileProvider;
     }
 
     static {
@@ -32,6 +39,10 @@ public class ExtendPALJNI {
 
     public static byte[] loadFileAsBytesProxy(String path) {
         try {
+            if(fileProvider != null) {
+                return fileProvider.readFile(path);
+            }
+
             File file = new File(path);
             byte[] result = new byte[(int) file.length()];
             DataInputStream dis = new DataInputStream(new FileInputStream(file));
