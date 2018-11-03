@@ -2,6 +2,7 @@
 #include "moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI.h"
 #include <CubismFramework.hpp>
 #include <JavaAllocator.hpp>
+#include <Live2DCubismCore.hpp>
 
 using namespace Live2D::Cubism::Framework;
 
@@ -12,7 +13,10 @@ using namespace Live2D::Cubism::Framework;
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_StartUp
 (JNIEnv * env, jclass obj) {
-	return CubismFramework::StartUp(new JavaAllocator(), NULL);
+	CubismFramework::Option option;
+	option.LogFunction = Live2D::Cubism::Core::csmGetLogFunction();
+	option.LoggingLevel = CubismFramework::Option::LogLevel_Verbose;
+	return CubismFramework::StartUp(new JavaAllocator(), &option);
 }
 
 /*
