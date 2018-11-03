@@ -53,14 +53,14 @@ set(FRAMEWORK_GLEW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0
 #Define Live2DCubismJNI Source
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
 set(Live2DCubismJNISource
-	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.c
-	${CoreJNI}/moe_leekcake_live2dforjvm_Live2DCubismCoreJNI.h)
+	${CoreJNI}/moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI.c
+	${CoreJNI}/moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI.h
 	
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
 #Define MemoryAccessJNI
 set(MemoryAccessJNISource
-${MemoryAccessJNI}/moe_leekcake_live2dforjvm_MemoryAccessJNI.c
-${MemoryAccessJNI}/moe_leekcake_live2dforjvm_MemoryAccessJNI.h
+${MemoryAccessJNI}/moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI.c
+${MemoryAccessJNI}/moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI.h
 )
 
 #Define Core
