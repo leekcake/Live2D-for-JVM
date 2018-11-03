@@ -30,6 +30,8 @@ static unsigned char* JavaPal_GetData(string path, Csm::csmSizeInt* outSize) {
 	unsigned char* buf = new unsigned char[len];
 	env->GetByteArrayRegion(arr, 0, len, reinterpret_cast<jbyte*>(buf));
 
+	*outSize = len;
+
 	return buf;
 }
 
