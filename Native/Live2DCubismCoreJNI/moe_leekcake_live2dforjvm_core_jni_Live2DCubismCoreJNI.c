@@ -8,7 +8,7 @@ void callback(const char* message) {
 	JNIEnv *env;
 	jint rs = (*vm)->AttachCurrentThread(vm, &env, NULL);
 
-	jclass callbackClass = (*env)->FindClass(env, "moe/leekcake/live2dforjvm/Live2DCubismCoreJNI");
+	jclass callbackClass = (*env)->FindClass(env, "moe/leekcake/live2dforjvm/core/jni/Live2DCubismCoreJNI");
 	jmethodID callbackMethodId = (*env)->GetStaticMethodID(env, callbackClass, "logCallback", "(Ljava/lang/String;)V");
 
 	(*env)->CallStaticVoidMethod(env, callbackClass, callbackMethodId, (*env)->NewStringUTF(env, message));
