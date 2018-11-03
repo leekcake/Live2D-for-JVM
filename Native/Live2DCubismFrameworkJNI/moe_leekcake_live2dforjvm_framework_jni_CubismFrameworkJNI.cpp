@@ -13,10 +13,10 @@ using namespace Live2D::Cubism::Framework;
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_StartUp
 (JNIEnv * env, jclass obj) {
-	CubismFramework::Option option;
-	option.LogFunction = Live2D::Cubism::Core::csmGetLogFunction();
-	option.LoggingLevel = CubismFramework::Option::LogLevel_Verbose;
-	return CubismFramework::StartUp(new JavaAllocator(), &option);
+	CubismFramework::Option* option = new CubismFramework::Option();
+	option->LogFunction = Live2D::Cubism::Core::csmGetLogFunction();
+	option->LoggingLevel = CubismFramework::Option::LogLevel_Verbose;
+	return CubismFramework::StartUp(new JavaAllocator(), option);
 }
 
 /*
