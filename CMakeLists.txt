@@ -8,11 +8,14 @@ find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
 endif()
 
+find_package(OpenGL REQUIRED)
+
 if(WIN32)
 	set(FRAMEWORK_DEFINITIOINS
 		-DCSM_TARGET_WIN_GL
 		-DGLEW_STATIC
 	)
+	add_definitions(${FRAMEWORK_DEFINITIOINS})
 	
 	# Visual Studioのソリューション生成
 	if (CMAKE_GENERATOR_PLATFORM STREQUAL "x64" AND CMAKE_GENERATOR MATCHES "Visual Studio 14 2015")
@@ -77,6 +80,15 @@ set(Live2DCubismJNISource
 	
 	${FrameworkJNI}/extend_cpp/JavaAllocator.cpp
 	${FrameworkJNI}/extend_cpp/JavaAllocator.hpp
+	
+	${FrameworkJNI}/extend_cpp/JavaDefine.cpp
+	${FrameworkJNI}/extend_cpp/JavaDefine.hpp
+	
+	${FrameworkJNI}/extend_cpp/JavaModel.cpp
+	${FrameworkJNI}/extend_cpp/JavaModel.hpp
+	
+	${FrameworkJNI}/extend_cpp/JavaPal.cpp
+	${FrameworkJNI}/extend_cpp/JavaPal.hpp
 	)
 	
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
@@ -102,8 +114,10 @@ add_library(
 target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
 target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework/src)
 target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI/extend_cpp)
+target_include_directories(Live2DCubismJNI PUBLIC ${FRAMEWORK_GLFW_PATH})
+target_include_directories(Live2DCubismJNI PUBLIC ${FRAMEWORK_GLEW_PATH})
 
-set(LIBS ${CSM_CORE_LIBS} Framework)
+set(LIBS ${CSM_CORE_LIBS} Framework glew_s glfw)
 
 # HACK  Prevent link errors on Android
 if (ANDROID)
