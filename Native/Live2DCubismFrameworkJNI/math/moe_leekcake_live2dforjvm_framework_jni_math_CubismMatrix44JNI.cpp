@@ -1,5 +1,8 @@
 #include <jni.h>
+#include <Math/CubismMatrix44.hpp>
 #include "moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI.h"
+
+using namespace Live2D::Cubism::Framework;
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -7,7 +10,9 @@
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_Construct
-  (JNIEnv *, jclass);
+(JNIEnv * env, jclass obj) {
+	return (jlong) new CubismMatrix44();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -15,7 +20,9 @@ JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubism
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_Deconstruct
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	delete (CubismMatrix44*)matrix;
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -23,7 +30,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_LoadIdentity
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	((CubismMatrix44*)matrix)->LoadIdentity();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -31,7 +40,12 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (J)[F
  */
 JNIEXPORT jfloatArray JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_GetArray
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	jfloatArray result = env->NewFloatArray(16);
+	csmFloat32* arr = ((CubismMatrix44*)matrix)->GetArray();
+	env->SetFloatArrayRegion(result, 0, 16, arr);
+	return result;
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -39,7 +53,9 @@ JNIEXPORT jfloatArray JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_
  * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_SetMatrix
-  (JNIEnv *, jclass, jlong, jfloatArray);
+(JNIEnv * env, jclass obj, jlong matrix, jfloatArray arr) {
+	((CubismMatrix44*)matrix)->SetMatrix(env->GetFloatArrayElements(arr, false));
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -47,7 +63,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_GetScaleX
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	return ((CubismMatrix44*)matrix)->GetScaleX();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -55,7 +73,9 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_GetScaleY
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	return ((CubismMatrix44*)matrix)->GetScaleY();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -63,7 +83,9 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_GetTranslateX
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	return ((CubismMatrix44*)matrix)->GetTranslateX();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -71,7 +93,9 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_GetTranslateY
-  (JNIEnv *, jclass, jlong);
+(JNIEnv * env, jclass obj, jlong matrix) {
+	return ((CubismMatrix44*)matrix)->GetTranslateY();
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -79,7 +103,9 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformX
-  (JNIEnv *, jclass, jlong, jlong);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
+	((CubismMatrix44*)matrix)->TransformX(x);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -87,7 +113,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformY
-  (JNIEnv *, jclass, jlong, jlong);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat y) {
+	((CubismMatrix44*)matrix)->TransformY(y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -95,7 +123,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformX
-  (JNIEnv *, jclass, jlong, jlong);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
+	((CubismMatrix44*)matrix)->InvertTransformX(x);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -103,7 +133,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformY
-  (JNIEnv *, jclass, jlong, jlong);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat y) {
+	((CubismMatrix44*)matrix)->InvertTransformY(y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -111,7 +143,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TranslateRelative
-  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+  (JNIEnv * env, jclass obj, jlong, jfloat, jfloat);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -119,7 +151,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_Translate
-  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x, jfloat y) {
+	((CubismMatrix44*)matrix)->Translate(x, y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -127,7 +161,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TranslateX
-  (JNIEnv *, jclass, jlong, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
+	((CubismMatrix44*)matrix)->TransformX(x);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -135,7 +171,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TranslateY
-  (JNIEnv *, jclass, jlong, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat y) {
+	((CubismMatrix44*)matrix)->TranslateY(y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -143,7 +181,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_ScaleRelative
-  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x, jfloat y) {
+	((CubismMatrix44*)matrix)->ScaleRelative(x, y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -151,7 +191,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_Scale
-  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+(JNIEnv * env, jclass obj, jlong matrix, jfloat x, jfloat y) {
+	((CubismMatrix44*)matrix)->Scale(x, y);
+}
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
@@ -159,4 +201,6 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_MultiplyByMatrix
-  (JNIEnv *, jclass, jlong, jlong);
+(JNIEnv * env, jclass obj, jlong matrix, jlong anotherMatrix) {
+	((CubismMatrix44*)matrix)->MultiplyByMatrix(((CubismMatrix44*)anotherMatrix));
+}

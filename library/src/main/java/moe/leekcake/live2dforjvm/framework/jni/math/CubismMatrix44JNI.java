@@ -18,11 +18,11 @@ public class CubismMatrix44JNI {
     public static native float GetTranslateX(long pointer);
     public static native float GetTranslateY(long pointer);
 
-    public static native void TransformX(long pointer, long x);
-    public static native void TransformY(long pointer, long y);
+    public static native void TransformX(long pointer, float x);
+    public static native void TransformY(long pointer, float y);
 
-    public static native void InvertTransformX(long pointer, long x);
-    public static native void InvertTransformY(long pointer, long y);
+    public static native void InvertTransformX(long pointer, float x);
+    public static native void InvertTransformY(long pointer, float y);
 
     public static native void TranslateRelative(long pointer, float x, float y);
     public static native void Translate(long pointer, float x, float y);
