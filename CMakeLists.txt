@@ -52,9 +52,29 @@ set(FRAMEWORK_GLEW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0
 
 #Define Live2DCubismJNI Source
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
+set(FrameworkJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismFrameworkJNI)
 set(Live2DCubismJNISource
 	${CoreJNI}/moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI.c
 	${CoreJNI}/moe_leekcake_live2dforjvm_core_jni_Live2DCubismCoreJNI.h
+	
+	${FrameworkJNI}/moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI.cpp
+	${FrameworkJNI}/moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI.h
+	
+	${FrameworkJNI}/math/moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI.cpp
+	${FrameworkJNI}/math/moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI.h
+	
+	${FrameworkJNI}/id/moe_leekcake_live2dforjvm_framework_jni_id_CubismIdJNI.cpp
+	${FrameworkJNI}/id/moe_leekcake_live2dforjvm_framework_jni_id_CubismIdJNI.h
+	
+	${FrameworkJNI}/id/moe_leekcake_live2dforjvm_framework_jni_id_CubismIdManagerJNI.cpp
+	${FrameworkJNI}/id/moe_leekcake_live2dforjvm_framework_jni_id_CubismIdManagerJNI.h
+	
+	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI.cpp
+	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI.h
+	
+	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI.cpp
+	${FrameworkJNI}/extend/moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI.h
+	)
 	
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
 #Define MemoryAccessJNI
@@ -71,8 +91,9 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework)
 
-include_directories(  ${CSM_CORE_INCLUDE_DIR}
-  ${CSM_COMPONENTS_INCLUDE_DIR}
+include_directories(  
+	${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework/src}
   )
 
 add_library(
@@ -81,10 +102,9 @@ add_library(
 	${Live2DCubismJNISource}
 )
 
-set(LIBS ${CSM_CORE_LIBS}
-${commonfiles})
+set(LIBS ${CSM_CORE_LIBS} Framework)
 
-message(${CSM_CORE_LIBS})
+message(${LIBS})
 
 # HACK  Prevent link errors on Android
 if (ANDROID)
