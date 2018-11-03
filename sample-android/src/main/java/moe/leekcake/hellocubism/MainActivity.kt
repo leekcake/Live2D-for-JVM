@@ -6,37 +6,19 @@ import android.opengl.GLES20.GL_COLOR_BUFFER_BIT
 import android.opengl.GLES20.glClear
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
-import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
-import moe.leekcake.live2dforjvm.type.*
-import moe.leekcake_live2dforjvm.sample.SampleGLApp
+import moe.leekcake.live2dforjvm.sample.SampleApp
 import java.io.InputStream
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 
 class MainActivity : Activity() {
-    inner class AndroidGLApp: SampleGLApp() {
-        override val width: Float
-            get() = glView.measuredWidth.toFloat()
-        override val height: Float
-            get() = glView.measuredHeight.toFloat()
-
+    inner class AndroidGLApp: SampleApp() {
         override fun generateTexture(fileName: String): Int {
             return Utils.loadTexture( application.assets.open(fileName) )
         }
-
-        override fun destroyTexture(id: Int) {
-            val ids = IntArray(1)
-            ids[0] = id
-
-            GLES20.glDeleteTextures(ids.size, ids, 0)
-        }
-
-        override fun openFile(fileName: String): InputStream {
-            return application.assets.open(fileName)
-        }
     }
+
     private val app = AndroidGLApp()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +45,7 @@ class MainActivity : Activity() {
     private inner class Renderer : GLSurfaceView.Renderer {
         override fun onDrawFrame(p0: GL10?) {
             glClear(GL_COLOR_BUFFER_BIT)
-            app.tick()
+            app.update()
         }
 
         override fun onSurfaceChanged(p0: GL10?, p1: Int, p2: Int) {

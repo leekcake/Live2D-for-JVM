@@ -1,10 +1,6 @@
 package moe.leekcake.live2dforjvm.sample
 
-import moe.leekcake.live2dforjvm.Live2DCubismCoreJNI
-import moe.leekcake.live2dforjvm.Live2DCubismFrameworkJNI
-import moe.leekcake.live2dforjvm.Live2DCubismGLRenderingJNI
-import moe.leekcake.live2dforjvm.type.*
-import moe.leekcake_live2dforjvm.sample.SampleGLApp
+import moe.leekcake.live2dforjvm.core.jni.Live2DCubismCoreJNI
 import org.lwjgl.Version
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
 import org.lwjgl.glfw.GLFW.*
@@ -13,39 +9,35 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryStack.stackPush
 import org.lwjgl.system.MemoryUtil.NULL
+import java.io.DataInputStream
 import java.io.File
 import java.io.FileInputStream
-import java.io.InputStream
 
 //Quick copy start from https://www.lwjgl.org/guide
 class Sample {
     private val windowWidth = 405f
     private val windowHeight = 720f
 
-    inner class WindowsGLApp: SampleGLApp() {
-        override val width: Float
-            get() = windowWidth
-        override val height: Float
-            get() = windowHeight
+    inner class WindowsApp: SampleApp() {
+        override fun readFile(path: String?): ByteArray {
+            val file = File(path)
+            val result = ByteArray(file.length().toInt())
+            val dis = DataInputStream(FileInputStream(file))
+            dis.readFully(result)
+            dis.close()
+            return result
+        }
 
         private fun convertFileName(fileName: String): String {
             return File( "../sample-hiyori", fileName).path
         }
 
         override fun generateTexture(fileName: String): Int {
-            return Texture.loadTexture( convertFileName(fileName) ).id
-        }
-
-        override fun destroyTexture(id: Int) {
-            glDeleteTextures(id)
-        }
-
-        override fun openFile(fileName: String): InputStream {
-            return FileInputStream(convertFileName(fileName))
+            return Texture.loadTexture( fileName ).id
         }
     }
 
-    private val app = WindowsGLApp()
+    private val app = WindowsApp()
 
     // The window handle
     private var window: Long = 0
@@ -138,7 +130,7 @@ class Sample {
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT)
-            app.tick()
+            app.update()
             glfwSwapBuffers(window) // swap the color buffers
 
             // Poll for window events. The key callback above will only be
