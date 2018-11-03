@@ -14,8 +14,12 @@ import javax.microedition.khronos.opengles.GL10
 
 class MainActivity : Activity() {
     inner class AndroidGLApp: SampleApp() {
-        override fun generateTexture(fileName: String): Int {
-            return Utils.loadTexture( application.assets.open(fileName) )
+        override fun getTexture(path: String?): Int {
+            return Utils.loadTexture( application.assets.open(path) )
+        }
+
+        override fun readFile(path: String?): ByteArray {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     }
 

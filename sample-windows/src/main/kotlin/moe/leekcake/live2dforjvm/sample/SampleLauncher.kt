@@ -19,8 +19,12 @@ class Sample {
     private val windowHeight = 720f
 
     inner class WindowsApp: SampleApp() {
+        override fun getTexture(path: String?): Int {
+            return Texture.loadTexture( File("../sample-hiyori", path).path ).id
+        }
+
         override fun readFile(path: String?): ByteArray {
-            val file = File(path)
+            val file = File("../sample-hiyori", path)
             val result = ByteArray(file.length().toInt())
             val dis = DataInputStream(FileInputStream(file))
             dis.readFully(result)
@@ -30,10 +34,6 @@ class Sample {
 
         private fun convertFileName(fileName: String): String {
             return File( "../sample-hiyori", fileName).path
-        }
-
-        override fun generateTexture(fileName: String): Int {
-            return Texture.loadTexture( fileName ).id
         }
     }
 

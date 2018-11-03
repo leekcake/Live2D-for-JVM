@@ -5,19 +5,19 @@ import moe.leekcake.live2dforjvm.framework.jni.extend.ExtendPALJNI
 import moe.leekcake.live2dforjvm.framework.type.extend.CubismCharacter
 import moe.leekcake.live2dforjvm.framework.type.math.CubismMatrix44
 
-abstract class SampleApp : ExtendPALJNI.FileProvider {
-    abstract fun generateTexture(path: String): Int
-
+abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvider {
     lateinit var char: CubismCharacter
     val matrix = CubismMatrix44()
 
     fun init() {
+        ExtendPALJNI.setFileProvider(this)
+        ExtendPALJNI.setTextureProvider(this)
+
         CubismFrameworkJNI.StartUp()
         CubismFrameworkJNI.Initialize()
 
         char = CubismCharacter()
 
-        ExtendPALJNI.setFileProvider(this)
         char.loadAssets("", "Hiyori.model3.json")
     }
 

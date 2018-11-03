@@ -1,19 +1,15 @@
 package moe.leekcake.live2dforjvm.framework.jni.extend;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.nio.file.Files;
 
 /***
  * Cubism Platform Abstraction Layer
  */
 public class ExtendPALJNI {
     public interface TextureProvider {
-        int GetTexture(String path);
+        int getTexture(String path);
     }
     private static TextureProvider textureProvider = null;
     public static void setTextureProvider(TextureProvider textureProvider) {
@@ -57,7 +53,7 @@ public class ExtendPALJNI {
 
     public static int getTextureProxy(String path) {
         try {
-            return textureProvider.GetTexture(path);
+            return textureProvider.getTexture(path);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
