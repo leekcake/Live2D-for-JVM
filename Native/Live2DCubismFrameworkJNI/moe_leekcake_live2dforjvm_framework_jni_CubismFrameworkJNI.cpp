@@ -12,7 +12,7 @@ using namespace Live2D::Cubism::Framework;
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_StartUp
 (JNIEnv * env, jclass obj) {
-	CubismFramework::StartUp(new JavaAllocator(), NULL);
+	return CubismFramework::StartUp(new JavaAllocator(), NULL);
 }
 
 /*
