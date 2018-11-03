@@ -84,17 +84,11 @@ ${MemoryAccessJNI}/moe_leekcake_live2dforjvm_core_jni_MemoryAccessJNI.h
 )
 
 #Define Core
-set(CSM_COMPONENTS_CORE_INCLUDE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include"  CACHE STRING "Path to Live2D Cubism Core include directory for native development.")
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore)
 
 #Define Components
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework)
-
-include_directories(  
-	${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework/src}
-  )
 
 add_library(
 	Live2DCubismJNI
@@ -102,9 +96,10 @@ add_library(
 	${Live2DCubismJNISource}
 )
 
-set(LIBS ${CSM_CORE_LIBS} Framework)
+target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeCore/include)
+target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Native/CubismNativeFramework/src)
 
-message(${LIBS})
+set(LIBS ${CSM_CORE_LIBS} Framework)
 
 # HACK  Prevent link errors on Android
 if (ANDROID)
