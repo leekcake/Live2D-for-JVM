@@ -19,6 +19,11 @@ class Sample {
     private val windowHeight = 720f
 
     inner class WindowsApp: SampleApp() {
+        override val windowWidth: Int
+            get() = this@Sample.windowWidth.toInt()
+        override val windowHeight: Int
+            get() = this@Sample.windowHeight.toInt()
+
         override fun getTexture(path: String?): Int {
             return Texture.loadTexture( File("../sample-hiyori", path).path ).id
         }

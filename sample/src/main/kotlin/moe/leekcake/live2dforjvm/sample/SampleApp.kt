@@ -7,7 +7,10 @@ import moe.leekcake.live2dforjvm.framework.type.math.CubismMatrix44
 
 abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvider {
     lateinit var char: CubismCharacter
-    val matrix = CubismMatrix44()
+    val projection = CubismMatrix44()
+
+    abstract val windowWidth: Int
+    abstract val windowHeight: Int
 
     fun init() {
         ExtendPALJNI.setFileProvider(this)
@@ -22,10 +25,10 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
     }
 
     fun update() {
-        matrix.loadIdentity()
-        matrix.scale(1f, 1f)
+        projection.scale(1.0f, (windowWidth) / (windowHeight).toFloat())
+
         char.update()
-        char.draw(matrix)
+        char.draw(projection)
     }
 
     fun destroy() {
