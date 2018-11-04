@@ -56,4 +56,8 @@ public class CubismCharacter extends AutoPointer {
     public boolean hitTest(String hitArea, float x, float y) {
         return ExtendModelJNI.HitTest(pointer, hitArea, x, y);
     }
+
+    public void setDragging(float x, float y) {
+        ExtendModelJNI.SetDragging(pointer, x, y);
+    }
 }

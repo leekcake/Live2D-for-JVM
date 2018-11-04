@@ -22,4 +22,5 @@ public class ExtendModelJNI {
     public static native void SetRandomExpression(long pointer);
     public static native void RegisterMotionEventCallback(long pointer, MotionEventFireable fireable);
     public static native boolean HitTest(long pointer, String hitAreaName, float x, float y);
+    public static native void SetDragging(long pointer, float x, float y);
 }

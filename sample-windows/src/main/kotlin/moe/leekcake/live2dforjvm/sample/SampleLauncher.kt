@@ -94,6 +94,27 @@ class Sample {
                 glfwSetWindowShouldClose(window, true) // We will detect this in the rendering loop
         }
 
+        var mx = 0.0
+        var my = 0.0
+
+        glfwSetCursorPosCallback(window) {
+            window, xpos, ypos ->
+            mx = xpos
+            my = ypos
+            app.handleCursor(mx.toFloat(), my.toFloat())
+        }
+        glfwSetMouseButtonCallback(window) {
+            window, button, action, mods ->
+
+            if(action == GLFW_PRESS) {
+                app.handleTouchBegin(mx.toFloat(), my.toFloat())
+            }
+            else if(action == GLFW_RELEASE)
+            {
+                app.handleTouchEnd(mx.toFloat(), my.toFloat())
+            }
+        }
+
         // Get the thread stack and push a new frame
         stackPush().use { stack ->
             val pWidth = stack.mallocInt(1) // int*

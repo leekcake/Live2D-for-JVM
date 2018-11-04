@@ -12,6 +12,24 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
     abstract val windowWidth: Int
     abstract val windowHeight: Int
 
+    var onTouch = false
+
+    fun handleTouchBegin(x: Float, y: Float) {
+        onTouch = true
+        handleCursor(x, y)
+    }
+
+    fun handleTouchEnd(x: Float, y: Float) {
+        handleCursor(0f, 0f)
+        onTouch = false
+    }
+
+    fun handleCursor(x: Float, y: Float) {
+        if(!onTouch) return
+        char.setDragging(x, y)
+        println("$x $y")
+    }
+
     fun init() {
         ExtendPALJNI.setFileProvider(this)
         ExtendPALJNI.setTextureProvider(this)
@@ -28,7 +46,7 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
         ExtendPALJNI.updateTime()
 
         projection.loadIdentity()
-        projection.scale(1f, 1f)
+        projection.scale(1f, windowWidth / windowHeight.toFloat())
 
         char.update()
         char.draw(projection)

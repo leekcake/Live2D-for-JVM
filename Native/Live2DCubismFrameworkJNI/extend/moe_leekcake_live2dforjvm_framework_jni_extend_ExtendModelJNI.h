@@ -103,6 +103,14 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_HitTest
   (JNIEnv *, jclass, jlong, jstring, jfloat, jfloat);
 
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    SetDragging
+ * Signature: (JFF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetDragging
+  (JNIEnv *, jclass, jlong, jfloat, jfloat);
+
 #ifdef __cplusplus
 }
 #endif

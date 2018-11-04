@@ -164,3 +164,13 @@ JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_E
 	env->ReleaseStringUTFChars(hitAreaName, hitAreaChar);
 	return result;
 }
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    SetDragging
+ * Signature: (JFF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetDragging
+(JNIEnv * env, jclass obj, jlong model, jfloat x, jfloat y) {
+	((JavaModel*)model)->SetDragging(x, y);
+}
