@@ -40,6 +40,8 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
         char = CubismCharacter()
 
         char.loadAssets("", "Hiyori.model3.json")
+
+        ExtendPALJNI.updateTime()
     }
 
     fun update() {
