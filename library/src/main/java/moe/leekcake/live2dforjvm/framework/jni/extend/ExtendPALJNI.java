@@ -61,4 +61,6 @@ public class ExtendPALJNI {
     }
 
     public static native void bindProxy();
+
+    public static native void updateTime();
 }

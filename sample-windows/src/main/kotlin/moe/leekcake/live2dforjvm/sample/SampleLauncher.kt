@@ -134,7 +134,8 @@ class Sample {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
-            glClear(GL_COLOR_BUFFER_BIT)
+            glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+            glClearDepth(1.0)
             app.update()
             glfwSwapBuffers(window) // swap the color buffers
 

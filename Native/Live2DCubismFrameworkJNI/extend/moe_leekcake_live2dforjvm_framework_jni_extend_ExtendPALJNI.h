@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI_bindProxy
   (JNIEnv *, jclass);
 
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI
+ * Method:    updateTime
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI_updateTime
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

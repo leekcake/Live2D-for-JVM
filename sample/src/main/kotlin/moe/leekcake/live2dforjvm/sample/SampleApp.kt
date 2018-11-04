@@ -25,7 +25,10 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
     }
 
     fun update() {
-        projection.scale(1.0f, (windowWidth) / (windowHeight).toFloat())
+        ExtendPALJNI.updateTime()
+
+        projection.loadIdentity()
+        projection.scale(1f, 1f)
 
         char.update()
         char.draw(projection)

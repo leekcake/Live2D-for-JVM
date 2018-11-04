@@ -58,3 +58,14 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
 	JavaPal::SetJavaPALTextureFunction(JavaPal_GetTexture);
 	JavaPal::SetJavaPALTimeFunction(JavaPal_GetTime);
 }
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI
+ * Method:    updateTime
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI_updateTime
+(JNIEnv *, jclass) {
+	JavaPal::UpdateTime();
+}
+
