@@ -14,6 +14,7 @@
 #include <fstream>
 #include <Model/CubismMoc.hpp>
 #include "JavaDefine.hpp"
+#include <Live2DCubismCore.hpp>
 
 using std::endl;
 using namespace Csm;
@@ -61,7 +62,7 @@ void JavaPal::PrintLog(const csmChar* format, ...)
     csmChar buf[256];
     va_start(args, format);
     vsnprintf(buf, sizeof(buf), format, args); // 標準出力でレンダリング
-    std::cerr << buf << std::endl;
+	Live2D::Cubism::Core::csmGetLogFunction()(buf);
     va_end(args);
 }
 
