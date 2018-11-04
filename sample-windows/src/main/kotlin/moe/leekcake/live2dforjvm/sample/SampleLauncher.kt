@@ -15,8 +15,8 @@ import java.io.FileInputStream
 
 //Quick copy start from https://www.lwjgl.org/guide
 class Sample {
-    private val windowWidth = 405f
-    private val windowHeight = 720f
+    private val windowWidth = 1900f
+    private val windowHeight = 1000f
 
     inner class WindowsApp: SampleApp() {
         override val windowWidth: Int
@@ -75,11 +75,13 @@ class Sample {
 
         // Configure GLFW
         glfwDefaultWindowHints() // optional, the current window hints are already the default
+        /*
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE) // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE) // the window will be resizable
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3)
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3)
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE)
+        */
 
         // Create the window
         window = glfwCreateWindow(windowWidth.toInt(), windowHeight.toInt(), "Hello Cubism with LWJGL!", NULL, NULL)
