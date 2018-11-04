@@ -20,14 +20,16 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
     }
 
     fun handleTouchEnd(x: Float, y: Float) {
-        handleCursor(0f, 0f)
         onTouch = false
+        char.setDragging(0f , 0f)
     }
 
     fun handleCursor(x: Float, y: Float) {
         if(!onTouch) return
-        char.setDragging(x, y)
-        println("$x $y")
+        val dx = ((x / windowWidth) - 0.5f) * 2f
+        val dy = -((y / windowHeight) - 0.5f) * 2f
+        char.setDragging(dx , dy)
+        //println("$dx $dy")
     }
 
     fun init() {
