@@ -164,7 +164,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TranslateX
 (JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
-	((CubismMatrix44*)matrix)->TransformX(x);
+	((CubismMatrix44*)matrix)->TranslateX(x);
 }
 
 /*
