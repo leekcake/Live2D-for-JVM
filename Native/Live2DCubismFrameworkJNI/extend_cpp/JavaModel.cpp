@@ -340,15 +340,9 @@ void JavaModel::Update()
 
     //-----------------------------------------------------------------
     _model->LoadParameters(); // 前回セーブされた状態をロード
-    if (_motionManager->IsFinished())
-    {
-        // モーションの再生がない場合、待機モーションの中からランダムで再生する
-        StartRandomMotion(MotionGroupIdle, PriorityIdle);
-    }
-    else
-    {
-        motionUpdated = _motionManager->UpdateMotion(_model, deltaTimeSeconds); // モーションを更新
-    }
+	if (!_motionManager->IsFinished()) {
+		motionUpdated = _motionManager->UpdateMotion(_model, deltaTimeSeconds); // モーションを更新
+	}
     _model->SaveParameters(); // 状態を保存
     //-----------------------------------------------------------------
     
@@ -539,6 +533,11 @@ void JavaModel::SetMotionEventHandler(JavaModelEventFunction function, void * da
 
 	_motionEventCallback = function;
 	_motionEventCallbackData = data;
+}
+
+Csm::csmBool JavaModel::IsInMotion()
+{
+	return !_motionManager->IsFinished();
 }
 
 void JavaModel::SetExpression(const csmChar* expressionID)

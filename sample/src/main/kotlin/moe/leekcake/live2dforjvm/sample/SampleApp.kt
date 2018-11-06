@@ -52,6 +52,9 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
         projection.loadIdentity()
         projection.scale(1f, windowWidth / windowHeight.toFloat())
 
+        if(!char.isInMotion) {
+            char.startRandomMotion("Idle", 1)
+        }
         char.update()
         char.draw(projection)
     }

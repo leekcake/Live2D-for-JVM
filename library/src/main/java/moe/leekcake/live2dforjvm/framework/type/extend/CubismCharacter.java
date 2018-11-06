@@ -60,4 +60,20 @@ public class CubismCharacter extends AutoPointer {
     public void setDragging(float x, float y) {
         ExtendModelJNI.SetDragging(pointer, x, y);
     }
+
+    public void setOpacity(float opacity) {
+        ExtendModelJNI.SetOpacity(pointer, opacity);
+    }
+
+    public float getOpacity() {
+        return ExtendModelJNI.GetOpacity(pointer);
+    }
+
+    public void setAcceleration(float x, float y, float z) {
+        ExtendModelJNI.SetAcceleration(pointer, x, y, z);
+    }
+
+    public boolean isInMotion() {
+        return ExtendModelJNI.IsInMotion(pointer);
+    }
 }

@@ -108,6 +108,8 @@ public:
 
 	void SetMotionEventHandler(JavaModelEventFunction function, void* data);
 
+	Csm::csmBool IsInMotion();
+
 protected:
     /**
      *  @brief  モデルを描画する処理。モデルを描画する空間のView-Projection行列を渡す。

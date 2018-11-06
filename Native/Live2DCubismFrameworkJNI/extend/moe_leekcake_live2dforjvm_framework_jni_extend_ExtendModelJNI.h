@@ -111,6 +111,38 @@ JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_E
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetDragging
   (JNIEnv *, jclass, jlong, jfloat, jfloat);
 
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    SetAcceleration
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetAcceleration
+  (JNIEnv *, jclass, jlong, jfloat, jfloat, jfloat);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    SetOpacity
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetOpacity
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    GetOpacity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_GetOpacity
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    IsInMotion
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_IsInMotion
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif
