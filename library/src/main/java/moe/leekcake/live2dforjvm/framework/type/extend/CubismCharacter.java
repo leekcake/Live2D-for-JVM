@@ -8,6 +8,8 @@ import moe.leekcake.live2dforjvm.framework.type.math.CubismMatrix44;
  * Wrapper of ExtendModel
  */
 public class CubismCharacter extends AutoPointer {
+    private CubismMatrix44 modelMatrix = null;
+
     public CubismCharacter() {
         super(ExtendModelJNI.Construct());
     }
@@ -75,5 +77,12 @@ public class CubismCharacter extends AutoPointer {
 
     public boolean isInMotion() {
         return ExtendModelJNI.IsInMotion(pointer);
+    }
+
+    public CubismMatrix44 getModelMatrix() {
+        if(modelMatrix == null) {
+            modelMatrix = new CubismMatrix44(ExtendModelJNI.GetModelMatrix(pointer));
+        }
+        return modelMatrix;
     }
 }

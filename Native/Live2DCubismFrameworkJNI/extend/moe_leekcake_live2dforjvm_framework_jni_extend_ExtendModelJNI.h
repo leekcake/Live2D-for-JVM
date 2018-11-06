@@ -143,6 +143,14 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Ext
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_IsInMotion
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI
+ * Method:    GetModelMatrix
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_GetModelMatrix
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

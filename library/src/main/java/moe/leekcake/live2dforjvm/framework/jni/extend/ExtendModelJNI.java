@@ -28,4 +28,6 @@ public class ExtendModelJNI {
     public static native void SetOpacity(long pointer, float opacity);
     public static native float GetOpacity(long pointer);
     public static native boolean IsInMotion(long pointer);
+
+    public static native long GetModelMatrix(long pointer);
 }
