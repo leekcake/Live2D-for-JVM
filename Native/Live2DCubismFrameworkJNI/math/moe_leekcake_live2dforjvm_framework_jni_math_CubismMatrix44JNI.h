@@ -82,33 +82,33 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
  * Method:    TransformX
- * Signature: (JF)V
+ * Signature: (JF)F
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformX
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformX
   (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
  * Method:    TransformY
- * Signature: (JF)V
+ * Signature: (JF)F
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformY
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformY
   (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
  * Method:    InvertTransformX
- * Signature: (JF)V
+ * Signature: (JF)F
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformX
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformX
   (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI
  * Method:    InvertTransformY
- * Signature: (JF)V
+ * Signature: (JF)F
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformY
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformY
   (JNIEnv *, jclass, jlong, jfloat);
 
 /*

@@ -102,9 +102,9 @@ JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_Cubis
  * Method:    TransformX
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformX
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformX
 (JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
-	((CubismMatrix44*)matrix)->TransformX(x);
+	return ((CubismMatrix44*)matrix)->TransformX(x);
 }
 
 /*
@@ -112,9 +112,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Method:    TransformY
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformY
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_TransformY
 (JNIEnv * env, jclass obj, jlong matrix, jfloat y) {
-	((CubismMatrix44*)matrix)->TransformY(y);
+	return ((CubismMatrix44*)matrix)->TransformY(y);
 }
 
 /*
@@ -122,9 +122,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Method:    InvertTransformX
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformX
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformX
 (JNIEnv * env, jclass obj, jlong matrix, jfloat x) {
-	((CubismMatrix44*)matrix)->InvertTransformX(x);
+	return ((CubismMatrix44*)matrix)->InvertTransformX(x);
 }
 
 /*
@@ -132,9 +132,9 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismM
  * Method:    InvertTransformY
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformY
+JNIEXPORT jfloat JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_math_CubismMatrix44JNI_InvertTransformY
 (JNIEnv * env, jclass obj, jlong matrix, jfloat y) {
-	((CubismMatrix44*)matrix)->InvertTransformY(y);
+	return ((CubismMatrix44*)matrix)->InvertTransformY(y);
 }
 
 /*
