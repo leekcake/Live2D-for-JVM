@@ -8,6 +8,10 @@ public class CubismMatrix44 extends AutoPointer {
         super(CubismMatrix44JNI.Construct());
     }
 
+    public CubismMatrix44(long pointer) {
+        super(pointer);
+    }
+
     @Override
     protected void releasePointer() {
         CubismMatrix44JNI.Deconstruct(pointer);
