@@ -15,8 +15,8 @@ import java.io.FileInputStream
 
 //Quick copy start from https://www.lwjgl.org/guide
 class Sample {
-    private val windowWidth = 1900f
-    private val windowHeight = 1000f
+    private val windowWidth = 480f
+    private val windowHeight = 800f
 
     inner class WindowsApp: SampleApp() {
         override val windowWidth: Int
