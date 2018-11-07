@@ -51,8 +51,10 @@ abstract class SampleApp : ExtendPALJNI.FileProvider, ExtendPALJNI.TextureProvid
         char.setDragging(0f , 0f)
         val dx = ((x / windowWidth) - 0.5f) * 2f
         val dy = -((y / windowHeight) - 0.5f) * 2f
-        if( char.hitTest("Head", dx , dy) ) {
-            println("You just hit cutest hiyori's head !!!")
+
+        println("Hit test: $dx $dy")
+        if( char.hitTest("Body", dx , dy) ) {
+            println("You just hit cutest hiyori's body !!! why!!! (?)")
         }
     }
 

@@ -522,6 +522,7 @@ csmBool JavaModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 
             return IsHit(drawID, x, y);
         }
     }
+	JavaPal::PrintLog("Warning! Tried to hit check with not exist hit area: %s", hitAreaName);
     return false; // 存在しない場合はfalse
 }
 
