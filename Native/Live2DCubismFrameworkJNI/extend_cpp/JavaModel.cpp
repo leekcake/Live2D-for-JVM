@@ -18,6 +18,7 @@
 #include <Motion/CubismMotionQueueEntry.hpp>
 #include "JavaDefine.hpp"
 #include "JavaPal.hpp"
+#include <stdlib.h>
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Framework::DefaultParameterId;

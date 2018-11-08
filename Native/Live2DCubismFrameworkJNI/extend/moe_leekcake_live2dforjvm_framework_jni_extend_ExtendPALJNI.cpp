@@ -1,13 +1,14 @@
 #include <jni.h>
 #include <JavaPal.hpp>
 #include "moe_leekcake_live2dforjvm_framework_jni_extend_ExtendPALJNI.h"
+#include <JNIHelper.h>
 
 using namespace std;
 static JavaVM* vm;
 
 static double JavaPal_GetTime() {
 	JNIEnv* env;
-	jint rs = vm->AttachCurrentThread((void**)&env, NULL);
+	jint rs = vm->AttachCurrentThread;
 
 	jclass callbackClass = env->FindClass("java/lang/System");
 	jmethodID callbackMethodId = env->GetStaticMethodID(callbackClass, "currentTimeMillis", "()J");
@@ -18,7 +19,7 @@ static double JavaPal_GetTime() {
 
 static unsigned char* JavaPal_GetData(string path, Csm::csmSizeInt* outSize) {
 	JNIEnv* env;
-	jint rs = vm->AttachCurrentThread((void**)&env, NULL);
+	jint rs = vm->AttachCurrentThread;
 
 	jclass callbackClass = env->FindClass("moe/leekcake/live2dforjvm/framework/jni/extend/ExtendPALJNI");
 	jmethodID callbackMethodId = env->GetStaticMethodID(callbackClass, "loadFileAsBytesProxy", "(Ljava/lang/String;)[B");
@@ -37,7 +38,7 @@ static unsigned char* JavaPal_GetData(string path, Csm::csmSizeInt* outSize) {
 
 static int JavaPal_GetTexture(const char* path) {
 	JNIEnv* env;
-	jint rs = vm->AttachCurrentThread((void**)&env, NULL);
+	jint rs = vm->AttachCurrentThread;
 
 	jclass callbackClass = env->FindClass("moe/leekcake/live2dforjvm/framework/jni/extend/ExtendPALJNI");
 	jmethodID callbackMethodId = env->GetStaticMethodID(callbackClass, "getTextureProxy", "(Ljava/lang/String;)I");

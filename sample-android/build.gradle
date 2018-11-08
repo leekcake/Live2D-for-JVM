@@ -37,15 +37,17 @@ android {
         }
     }
     aaptOptions {
-        noCompress 'png', 'moc3'
+        noCompress 'png', 'moc3', 'json'
     }
-    /*
     externalNativeBuild {
         cmake {
             path rootProject.file('CMakeLists.txt').absolutePath
         }
     }
-    */
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

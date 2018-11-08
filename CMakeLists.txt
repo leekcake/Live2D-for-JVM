@@ -8,13 +8,25 @@ find_package(JNI REQUIRED)
 include_directories(${JNI_INCLUDE_DIRS})
 endif()
 
-find_package(OpenGL REQUIRED)
+if(NOT ANDROID AND NOT EMSCRIPTEN AND NOT IOS AND NOT RPI)
+	set(IS_DESKTOP TRUE)
+else()
+	set(IS_DESKTOP FALSE)
+endif()
+
+
+if(${IS_DESKTOP})
+	find_package(OpenGL REQUIRED)
+endif()
 
 if(WIN32)
+	#TODO: enable when it desktop
+	
 	set(FRAMEWORK_DEFINITIOINS
 		-DCSM_TARGET_WIN_GL
 		-DGLEW_STATIC
 	)
+
 	add_definitions(${FRAMEWORK_DEFINITIOINS})
 	
 	# Visual Studioのソリューション生成
@@ -43,15 +55,20 @@ if(WIN32)
 	elseif (CMAKE_GENERATOR MATCHES "NMake Makefiles" AND MSVC_VERSION MATCHES 1800 )
 		link_directories(${CMAKE_SOURCE_DIR}/../../../../Core/lib/windows/x86/120)
 	endif () 
+	
+	#glew_s
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0/build/cmake)
+	#glfw
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glfw-3.2.1)
 endif()
-
-#glew_s
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0/build/cmake)
-#glfw
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glfw-3.2.1)
 
 set(FRAMEWORK_GLFW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glfw-3.2.1/include)
 set(FRAMEWORK_GLEW_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Native/ThirdParty/glew-2.1.0/include)
+
+if(ANDROID)
+	add_definitions(-D CSM_TARGET_ANDROID_ES2)
+	add_definitions(-D PLATFORM_ANDROID)
+endif()
 
 #Define Live2DCubismJNI Source
 set(CoreJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/Live2DCubismCoreJNI)
@@ -89,6 +106,8 @@ set(Live2DCubismJNISource
 	
 	${FrameworkJNI}/extend_cpp/JavaPal.cpp
 	${FrameworkJNI}/extend_cpp/JavaPal.hpp
+	
+	${FrameworkJNI}/extend_cpp/JNIHelper.h
 	)
 	
 set(MemoryAccessJNI ${CMAKE_CURRENT_SOURCE_DIR}/Native/MemoryAccessJNI)
@@ -117,7 +136,13 @@ target_include_directories(Live2DCubismJNI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Na
 target_include_directories(Live2DCubismJNI PUBLIC ${FRAMEWORK_GLFW_PATH})
 target_include_directories(Live2DCubismJNI PUBLIC ${FRAMEWORK_GLEW_PATH})
 
-set(LIBS ${CSM_CORE_LIBS} Framework glew_s glfw)
+set(LIBS ${CSM_CORE_LIBS} Framework)
+
+if(${IS_DESKTOP})
+	list(APPEND LIBS glew_s glfw)
+endif()
+
+# glew_s glfw
 
 # HACK  Prevent link errors on Android
 if (ANDROID)

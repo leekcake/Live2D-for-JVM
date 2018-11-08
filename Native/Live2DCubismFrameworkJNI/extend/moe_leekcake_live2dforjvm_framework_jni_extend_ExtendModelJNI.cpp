@@ -2,6 +2,7 @@
 #include "moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI.h"
 #include <JavaModel.hpp>
 #include <Math/CubismMatrix44.hpp>
+#include <JNIHelper.h>
 
 using namespace Live2D::Cubism::Framework;
 
@@ -32,8 +33,8 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_LoadAssets
 (JNIEnv * env, jclass obj, jlong model, jstring baseDir, jstring fn) {
-	const char* baseDirChar = env->GetStringUTFChars(baseDir, false);
-	const char* fnChar = env->GetStringUTFChars(fn, false);
+	const char* baseDirChar = env->GetStringUTFChars(baseDir, NULL);
+	const char* fnChar = env->GetStringUTFChars(fn, NULL);
 	((JavaModel*)model)->LoadAssets(baseDirChar, fnChar);
 	env->ReleaseStringUTFChars(baseDir, baseDirChar);
 	env->ReleaseStringUTFChars(fn, fnChar);
@@ -76,7 +77,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_StartMotion
 (JNIEnv * env, jclass obj, jlong model, jstring group, jint no, jint priority) {
-	const char* groupChar = env->GetStringUTFChars(group, false);
+	const char* groupChar = env->GetStringUTFChars(group, NULL);
 
 	((JavaModel*)model)->StartMotion(groupChar, no, priority);
 
@@ -90,7 +91,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_StartRandomMotion
 (JNIEnv * env, jclass obj, jlong model, jstring group, jint no) {
-	const char* groupChar = env->GetStringUTFChars(group, false);
+	const char* groupChar = env->GetStringUTFChars(group, NULL);
 
 	((JavaModel*)model)->StartRandomMotion(groupChar, no);
 
@@ -104,7 +105,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_SetExpression
 (JNIEnv * env, jclass obj, jlong model, jstring expressionID) {
-	const char* expressionIDChar = env->GetStringUTFChars(expressionID, false);
+	const char* expressionIDChar = env->GetStringUTFChars(expressionID, NULL);
 
 	((JavaModel*)model)->SetExpression(expressionIDChar);
 
@@ -131,7 +132,7 @@ struct MotionEventCallbackData {
 void MotionEventCallback(void* data, const char* value) {
 	MotionEventCallbackData* callbackData = (MotionEventCallbackData*)data;
 	JNIEnv* env;
-	jint rs = callbackData->vm->AttachCurrentThread((void**)&env, NULL);
+	jint rs = callbackData->vm->AttachCurrentThread;
 
 	jstring str = env->NewStringUTF(value);
 	env->CallVoidMethod(callbackData->callbackCls, callbackData->callbackMethodID, str);
@@ -159,7 +160,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_Exten
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_extend_ExtendModelJNI_HitTest
 (JNIEnv * env, jclass obj, jlong model, jstring hitAreaName, jfloat x, jfloat y) {
-	const char* hitAreaChar = env->GetStringUTFChars(hitAreaName, false);
+	const char* hitAreaChar = env->GetStringUTFChars(hitAreaName, NULL);
 	jboolean result = ((JavaModel*)model)->HitTest(hitAreaChar, x, y);
 	env->ReleaseStringUTFChars(hitAreaName, hitAreaChar);
 	return result;

@@ -15,7 +15,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_id_CubismIdM
 	jsize len = env->GetArrayLength(strings);
 	for (int i = 0; i < len; i++) {
 		jstring strObj = (jstring) env->GetObjectArrayElement(strings, i);
-		const char *rawString = env->GetStringUTFChars(strObj, false);
+		const char *rawString = env->GetStringUTFChars(strObj, NULL);
 		vector.PushBack(csmString(rawString));
 		env->ReleaseStringUTFChars(strObj, rawString);
 	}
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_id_CubismIdM
  */
 JNIEXPORT void JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_id_CubismIdManagerJNI_RegisterId
 (JNIEnv * env, jclass obj, jlong im, jstring str) {
-	const char *rawString = env->GetStringUTFChars(str, false);
+	const char *rawString = env->GetStringUTFChars(str, NULL);
 	((CubismIdManager*)im)->RegisterId(csmString(rawString));
 	env->ReleaseStringUTFChars(str, rawString);
 }

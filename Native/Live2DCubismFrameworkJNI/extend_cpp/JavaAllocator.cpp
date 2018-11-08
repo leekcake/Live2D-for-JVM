@@ -7,6 +7,7 @@
 */
 
 #include "JavaAllocator.hpp"
+#include <stdlib.h>
 
 using namespace Csm;
 

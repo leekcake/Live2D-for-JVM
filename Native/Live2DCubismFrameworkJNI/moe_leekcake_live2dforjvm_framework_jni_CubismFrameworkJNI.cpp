@@ -3,7 +3,10 @@
 #include <CubismFramework.hpp>
 #include <JavaAllocator.hpp>
 #include <Live2DCubismCore.hpp>
+
+#ifdef GLEW_ENABLED
 #include <GL/glew.h>
+#endif
 
 using namespace Live2D::Cubism::Framework;
 
@@ -14,10 +17,12 @@ using namespace Live2D::Cubism::Framework;
  */
 JNIEXPORT jboolean JNICALL Java_moe_leekcake_live2dforjvm_framework_jni_CubismFrameworkJNI_StartUp
 (JNIEnv * env, jclass obj) {
+#ifdef GLEW_ENABLED
 	if (glewInit() != GLEW_OK)
 	{
 
 	}
+#endif
 
 	CubismFramework::Option* option = new CubismFramework::Option();
 	option->LogFunction = Live2D::Cubism::Core::csmGetLogFunction();
