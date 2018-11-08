@@ -34,7 +34,7 @@ object Utils {
             val line = row.scanline
             for(x in 0 until reader.imgInfo.cols) {
                 offset = x * row.imgInfo.channels
-                ib.put(x + ((height - y - 1) * width), line[offset].shl(24) or line[offset + 1].shl(16) or line[offset + 2].shl(8) or line[offset + 3])
+                ib.put(x + (y * width), line[offset].shl(24) or line[offset + 1].shl(16) or line[offset + 2].shl(8) or line[offset + 3])
             }
         }
 
