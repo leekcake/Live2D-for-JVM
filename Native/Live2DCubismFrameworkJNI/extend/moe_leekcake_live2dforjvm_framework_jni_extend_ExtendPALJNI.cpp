@@ -12,7 +12,7 @@ static double JavaPal_GetTime() {
 	jclass callbackClass = env->FindClass("java/lang/System");
 	jmethodID callbackMethodId = env->GetStaticMethodID(callbackClass, "currentTimeMillis", "()J");
 
-	long time = env->CallLongMethod(callbackClass, callbackMethodId);
+	long time = env->CallStaticLongMethod(callbackClass, callbackMethodId);
 	return time / (double)1000;
 }
 
