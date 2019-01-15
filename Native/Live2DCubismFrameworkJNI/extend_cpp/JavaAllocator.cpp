@@ -11,7 +11,7 @@
 
 using namespace Csm;
 
-void* JavaAllocator::Allocate(const csmUint32  size)
+void* JavaAllocator::Allocate(const csmSizeType size)
 {
     return malloc(size);
 }
@@ -21,7 +21,7 @@ void JavaAllocator::Deallocate(void* memory)
     free(memory);
 }
 
-void* JavaAllocator::AllocateAligned(const csmUint32 size, const csmUint32 alignment)
+void* JavaAllocator::AllocateAligned(const csmSizeType size, const csmUint32 alignment)
 {
     size_t offset, shift, alignedAddress;
     void* allocation;
